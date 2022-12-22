@@ -14,9 +14,9 @@ le fichier `pdf` final.
 ### Exemples de documents générés par `genExam` au format $\LaTeX$ :
 
 #### Enoncé : 
-![exemple_enonce_genExam](https://github.com/FilipeVasconcelos/unix-inge1/blob/main/genExam/exemple/exemple_enonce_genExam.png)
+![exemple_enonce_genExam](https://github.com/FilipeVasconcelos/genExam/blob/main/fig/exemple_enonce_genExam.png)
 #### Corrigé :
-![exemple_corrige_genExam](https://github.com/FilipeVasconcelos/unix-inge1/blob/main/genExam/exemple/exemple_corrige_genExam.png)
+![exemple_corrige_genExam](https://github.com/FilipeVasconcelos/genExam/blob/main/fig/exemple_corrige_genExam.png)
 
 
 ### help :  
