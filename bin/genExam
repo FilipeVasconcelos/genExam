@@ -1,0 +1,322 @@
+#!/bin/bash
+# ------------------------------------------------------------------------------
+# genExam (Génération d'examen)
+# ------------------------------------------------------------------------------
+# Génération d'un examen du type quiz à partir d'une base de données 
+# de questions au format .tex_
+# ------------------------------------------------------------------------------
+# Version     : v2.0
+# Date        : Novembre 2022
+# Auteur      : fmv
+# -------------
+# description : genExam génère deux documents pdf (corrigé et énoncé).
+# Le fonctionnement globale est décrit par le diagramme suivant :
+# 
+#       *.tex_ => tex => pdf
+#
+# Le format *.tex_ des questions est un format qui se veut simple. 
+# Pour l'instant, seule deux types de questions/réponses sont envisagés :
+#
+# 1) question à Choix Multiples (CM) :
+#       ----------------------------------
+#       #Q Une question
+#       #ANS CM 
+#       A. <réponse_1> ✓ 
+#       B. <réponse_2> ✓
+#       C. <réponse_3>
+#       D. <réponse_4>
+#       #TAGS
+#       ----------------------------------
+# 2) question d'Appariement  (A) :
+#       ----------------------------------
+#       #Q Une question
+#       #ANS A 
+#       A. <énoncé_1>  1. <réponse_1>
+#       B. <énoncé_2>  2. <réponse_2>
+#       C. <énoncé_3>  3. <réponse_3>
+#       D. <énoncé_4>  4. <réponse_4>
+#       #TAGS
+#       
+#       Note : pour l'instant le champ #TAGS n'est pas du tout utilisé à part
+#              pour des questions de statistiques..
+# -------------
+# ------------------------------------------------------------------------------
+#  différents scripts sont utilisés (voir README) 
+# ------------------------------------------------------------------------------
+# quelques constantes
+source bin/global.sh
+version="v2.0"
+author="fmv"
+now=$(date) 
+# quelques fonctions
+credits()
+{
+    echo "------------------------------------------------------------------------------"
+    echo "genExam (Génération d'examen)"
+    echo "------------------------------------------------------------------------------"
+    echo "Date        : " ${now}
+    echo "Version     : " ${version}
+    echo "Auteur      : " ${author}
+    echo -e "Description : genExam génère deux documents pdf (énoncé et corrigé)
+              à partir de la banque de questions."
+    echo "------------------------------------------------------------------------------"
+}
+usage()
+{
+    echo -e "${RED}Usage :${NC} $0 OPTIONS"
+    echo "------------------------------------------------------------------------------"
+    echo -e "-h/--help            : cette aide"
+    echo -e "-v/--english         : english version (default non)"
+    echo -e "-n/--nbQ    [nbQ]    : nombre de questions (default = all of them)"
+    echo -e "-o/--order  [file]   : fichier donnant l'ordre des questions (default random)"
+    echo -e "-q/--qtex   [rep]    : répertoire des questions à utliser (default qtex ou qtex_english)"
+    echo -e "-e/--examen [examen] : nom de l'examen (default = Examen final)"
+    echo -e "-m/--module [module] : module de l'examen (default = None)"
+    echo -e "-p/--promo  [promo]  : promotion (default = None )"
+    echo -e "-a/--annee  [annee]  : année scolaire (default = None)"
+    echo -e "-d/--date   [date]   : date de l'examen (default = None)"
+}
+clean_build()
+{
+    rm ${build}/* 2> /dev/null
+}
+parameters()
+{
+    echo "Paramètres          : "
+    echo "------------------------------------------------------------------------------"
+    if [ "${english}" = "_english" ]
+    then
+        echo "english version"
+    fi 
+    if [ -n "${orderFile}" ]
+    then
+        echo "l'ordre des questions est donné par ${orderFile}"
+    else
+        echo "l'ordre des questions est 'random'"
+    fi
+    echo "nombre de questions : ${nbQ}"
+    echo "examen              : ${examen} (${examenOut})"
+    echo "module              : ${module}"
+    echo "promo               : ${promo}"
+    echo "année               : ${annee}"
+    echo "date de l'examen    : ${dateEx}"
+    echo "fichier en sortie   : ${output}"
+    echo
+    echo "------------------------------------------------------------------------------"
+    echo "Répertoires de travail    : "
+    echo "------------------------------------------------------------------------------"
+    echo "banque de questions       : $(basename ${qtex})"
+    echo "repertoire de compilation : $(basename ${build})"
+    echo "sortie des pdf            : $(basename ${pdf})"
+    echo "sortie des tex            : $(basename ${tex})"
+    echo "principaux templates      : $(basename ${templates})"
+    echo "------------------------------------------------------------------------------"
+    echo
+}
+# -------------------------------------------------------------------
+#  working directories
+# -------------------------------------------------------------------
+bin=${PWD}/bin
+build=${PWD}/build
+clean_build
+pdf=${PWD}/pdf
+tex=${PWD}/tex
+templates=${PWD}/templates
+if [ ! -d ${build} ]     || \
+   [ ! -d ${pdf} ]       || \
+   [ ! -d ${templates} ] || \
+   [ ! -d ${tex} ]       
+then
+    printf "${RED}WARNING${NC}\n"
+    printf "Vous devriez avoir quelques répertoires de travail : \n"
+    printf "    - 'build'     : entrée/sortie de la plupart des scripts (nettoyer au début)\n"
+    printf "    - 'pdf'       : sortie des pdf générés\n" 
+    printf "    - 'tex'       : sortie des tex générés\n"
+    printf "    - 'templates' : répertoire des principaux template LaTeX\n"
+    exit 1
+fi
+# -------------------------------------------------------------------
+# option parser 
+# valeurs par défaut
+nbQ=  # nombre de questions à générer
+module=""
+promo=""
+dateEx=""
+annee=""
+english= # version en anglais   non : vide oui : _en
+while [ $# -gt 0 ]
+do
+    opt=$1
+    case $opt in 
+        -h|--help)
+            usage
+            exit 1
+            break;;
+        -n|--nbQ) 
+            nbQ=$2
+            shift;;
+        -m|--module) 
+            module=$2
+            shift;;
+        -e|--examen) 
+            examen=$2
+            shift;;
+        -p|--promo) 
+            promo=$2
+            shift;;
+        -q|--qtex) 
+            qtex=$2
+            shift;;
+        -d|--date) 
+            dateEx=$2
+            shift;;
+        -o|--order) 
+            orderFile=$2
+            shift;;
+        -v|--english) 
+            english=_english
+            ;;
+        -a|--annee) 
+            annee=$2
+            shift;;
+    esac
+    shift
+done
+echo "fin de lecture des options"
+[ -z ${module} ] && echo "Donner un nom de module (option --module) exemple : --module UNIX" && exit 1
+[ -z ${promo} ] && echo "Donner un nom de promotion (option --promo) exemple : --promo INGE1" && exit 1
+[ -z ${dateEx} ] && echo "Donner une date d'examen (option --date) exemple : --date \"5 janvier 2023\"" && exit 1
+[ -z ${annee} ] && echo "Donner une année académique (option --annee) exemple : --annee 2022-2023" && exit 1
+if [ -z "${english}" ]
+then
+    examen="Examen final"
+else
+    examen="Final Exam"
+fi
+# banque de questions anglais ou français ?
+if [ -z "${qtex}" ]
+then
+    qtex=${PWD}/qtex${english}
+else
+    qtex=$(realpath ${qtex})
+fi
+# la variable nbQ est vide on traite toutes les questions de la banques 
+# d'exercices.
+if [ -n "${orderFile}" ]
+then
+    nbQ=$(cat ${orderFile}| wc -l)
+else
+    [ -z ${nbQ} ] && nbQ=$(ls -1 ${qtex}/ | wc -l) 
+fi
+# ------------------------------------------------------------------------------
+# filtrer le template en fonction des paramètres 
+sed -e "s/__MODULE__/${module}/" \
+    -e "s/__DATE__/${dateEx}/" \
+    -e "s/__PROMO__/${promo}/" \
+    -e "s/__EXAMEN__/${examen}/" \
+    -e "s/__ANNEE__/${annee}/" ${templates}/template_qcm${english}.tex > ${build}/template.tex
+# ------------------------------------------------------------------------------
+examenOut="${examen,,}"
+examenOut="${examenOut// /_}" 
+# nom des fichiers en sortie
+output=${module}_${promo}_${annee}_${examenOut}${english}
+
+# afficher les credits
+credits
+# afficher les paramètres
+parameters
+
+# liste des nbQ questions dans un ordre aléatoire (on utilise 
+# le même ordre pour les deux documents générés)
+if [ -n "${orderFile}" ]
+then
+    tmp_qtex=$(cat ${orderFile})
+    if [ -z "${english}" ]
+    then
+        for ques in ${tmp_qtex} 
+        do
+            echo $(realpath ${qtex}/${ques}) 
+        done > tmp_qtex
+    else
+        for ques in ${tmp_qtex} 
+        do
+            echo $(realpath ${qtex}/${ques%%.*}_en.tex_)
+        done > tmp_qtex
+    fi
+    random_qtex=$(cat tmp_qtex)
+    rm tmp_qtex
+
+else
+    random_qtex=$(ls ${qtex}/*.tex_ | shuf | head -n ${nbQ})
+fi
+# ------------------------------------------------------------------------------
+# sauvegarder les questions utilisées dans un fichier ("used_questions_last_run") 
+> used_questions_last_run
+for ques in ${random_qtex}
+do
+    echo $(basename ${ques}) >> used_questions_last_run
+done
+# ------------------------------------------------------------------------------
+# boucle sur les deux types de documents générés 
+for texam in corrige enonce
+do
+    printf "génération du document : ${texam}\n"
+    # initialisation de fichiers pour le résumé du corrigé.
+    if [ ${texam} == "corrige" ] 
+    then
+        echo "\\section*{Corrigé (Résumé)}" > ${build}/corrige.tex
+        touch ${build}/corrige.tmp
+    fi
+    # template principale 
+    cat ${build}/template.tex > ${build}/qcm_${texam}.tex
+    # kques indice de la question (numéro dans le document tex final)
+    kques=1
+    # boucle sur les questions 
+    for ques in ${random_qtex}
+    do
+        printf "\rtraitement des questions : %2.0f %%" $(echo "($kques/$nbQ)*100" | bc -l)
+        # mélanger les réponses !
+        # aleaQ 
+        [ ! -f ${build}/tmp_${kques} ] && ${bin}/aleaQ ${ques} > ${build}/tmp_${kques}
+        # *.tex_ => *.tex
+        # teXQ
+        ${bin}/teXQ ${build}/tmp_${kques} ${texam} ${kques} >> ${build}/qcm_${texam}.tex
+        # next question 
+        kques=$((kques+1))
+    done
+    echo ""
+    # ajout de la section Corrigé Résumé
+    if [ ${texam} == "corrige" ] 
+    then
+        echo "\,\\clearpage"      >> ${build}/qcm_${texam}.tex
+        cat ${build}/corrige.tex  >> ${build}/qcm_${texam}.tex
+    fi
+    # end document du tex principal ... on compile !
+    echo "\end{document}"         >> ${build}/qcm_${texam}.tex 
+
+    # 2 run pdflatex
+    for run in 1 2 
+    do
+        timer=0
+        pdflatex -output-directory=${build} ${build}/qcm_${texam}.tex > /dev/null &
+        while [ -d /proc/$! ]
+        do 
+            printf "\rpdflatex en cours (run ${run}) elapsed time : ${timer}s" 
+            timer=$((timer+1))
+            sleep 1
+        done
+        echo
+    done 
+    echo
+    if [ -f ${build}/qcm_${texam}.pdf ] 
+    then
+        mv ${build}/qcm_${texam}.pdf ${pdf}/${output}_${texam}.pdf
+        cp ${build}/qcm_${texam}.tex ${tex}/${output}_${texam}.tex
+    else
+        echo -e "${RED}ERROR${NC} in LaTeX file. check" qcm_${texam}.tex
+        exit 1
+    fi
+    echo "${output}_${texam}.pdf terminé"
+    echo "------------------------------------------------------------------------------"
+done
+rm ${build}/tmp* tmp

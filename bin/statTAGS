@@ -1,0 +1,29 @@
+#!/bin/bash
+# -------------
+# description :  Retourne des statistiques sur les TAGS à partir d'un repertoire
+#                de questions ou un fichier listant des questions passé en 
+#                paramètre. Ce script un wrapper pour un script python faisant
+#                les calculs statistiques.
+# -------------
+source bin/global.sh
+errorArg 1 $# $0 "(un répertoire de questions ou un liste de question (fichier))"
+if [ -f $1 ] 
+then
+    nbQ=$(cat $1 | wc -l)
+    echo "nombre de questions" ${nbQ}
+    echo ${nbQ} > tmp
+    for ques in $(cat $1)
+    do
+        bin/getTAGS $(realpath qtex/${ques}) >> tmp
+    done
+else
+    qtex=$1
+    nbQ=$(ls -1 ${qtex}/ | wc -l)
+    echo "nombre de questions" ${nbQ}
+    echo ${nbQ} > tmp
+    for ques in ${qtex}/*
+    do
+        bin/getTAGS ${ques} >> tmp
+    done
+fi
+bin/statTAGS.py < tmp

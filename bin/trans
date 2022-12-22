@@ -1,0 +1,32 @@
+#!/bin/bash
+# -------------
+# description :  Traduit une question au format tex_ du français vers l'anglais.
+#                La question est passée en paramètre.
+#                Le script utilise l'api de google 
+# -------------
+source bin/global.sh
+errorArg 1 $# $0 "<tex_>"
+sl=fr # source
+tl=en # target
+base_url="https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q="
+ua='Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'
+# fonction trans(late) one string
+trans(){
+    qry=$( echo $1  | sed 's/{/\\{/g'| sed 's/}/\\}/g'| sed -E 's/\s{1,}/\+/g' )
+    full_url=${base_url}${qry}
+    response=$(curl -sA "${ua}" "${full_url}")
+    echo ${response} | sed 's/â/✓/g'| sed 's/\\\\/\\/g' | sed 's/","/\n/g' | sed -E 's/\[|\]|"//g' | head -1
+}
+#translate Q
+Q=$(bin/getQ $1 | sed 's/^#Q //')
+echo "#Q " $(trans "$Q")
+bin/getANS $1
+# translate CM
+A=$(bin/getA $1)
+export IFS=
+while read -r line
+do 
+    trans "${line}"
+done <<< $A
+#cat TAGS
+bin/getTAGS $1 

@@ -1,0 +1,125 @@
+#!/bin/bash
+# -------------
+# description : Génère le fichier le programme latex du corrigé ou de l'énoncé 
+#               pour une question donnée passée en paramètre. Le script prend 3
+#               paramètres. 
+#               Note ce script fait beaucoup trop de choses !!
+# -------------
+source bin/global.sh
+errorArg 3 $# $0 "TEX_ TEXAM NUMQ"
+build=${PWD}/build
+quest=$1
+texam=$2
+numQ=$3
+echo "\question{$(bin/getQ ${quest} | grep -oP "(?<=#Q )(.*)")}\\\\[0.2cm]"
+bin/getA ${quest} > tmp 
+ECgetA=$? 
+# -----------------------------------------------------------------------------
+#                               VERSION CORRIGE
+# -----------------------------------------------------------------------------
+if [ "${texam}" == "corrige" ] 
+then
+    if [ ${ECgetA} -eq 1 ] #CM (choix multiple) 
+    then
+        grep -P "(?<=[A-Z]\.).*" ${quest} |  
+        awk '{        
+                printf "\\indent"
+                if ($NF=="✓") {   
+                    NF--;
+                    if ($NF=="\\newline") {
+                        NF--;
+                        printf "\\textbf{"$1"} {\\color{OliveGreen} ";
+                        $1="";
+                        printf $0" {\\large\\cmark} }\\newline\n";
+                        wnew=1;
+                    }
+                    else {
+                        printf "\\textbf{"$1"} {\\color{OliveGreen} ";
+                        $1="";
+                        printf $0" {\\large \\cmark} }\\hfill\n"
+                        wnew=0;
+                    }
+                }
+                else {
+                    if ($NF=="\\newline") {
+                        NF--;
+                        printf "\\textbf{"$1"} {\\color{BrickRed}   ";
+                        $1="";
+                        printf $0" {\\large\\xmark} }\\newline\n";
+                        wnew=1;
+                    }
+                    else {
+                        printf "\\textbf{"$1"} {\\color{BrickRed}   ";
+                        $1="";
+                        printf $0" {\\large\\xmark} }\\hfill"
+                        wnew=0
+                    }
+                }
+        } ENDFILE{if (wnew==0) {printf "\\newline\n"}}'
+    elif [ ${ECgetA} -eq 2 ] #A (appariemment) 
+    then
+        # création du fichier A_corrige.tex pour le tikz du corrigé 
+        paste ${build}/shuf_ans1 ${build}/shuf_ans2 | awk '{print "\\draw[very thick] (b"$1") -- (c"$2");"}' > ${build}/Acorrige.tex
+        bin/genAppariement.py ${build}/Acorrige.tex < ${quest}
+    fi
+    # corrige.tmp
+    nbans=$(bin/getA ${quest} |wc -l)
+    grep -P "(?<=[A-Z]\.).*" ${quest} | grep "✓" | \
+    awk -v na=${nbans} -v n=${numQ} 'BEGIN{
+                                    printf n" "
+                               }
+                               {
+                                  printf substr($1, 1, length($1)-1)
+                               } 
+                        ENDFILE{ 
+                                printf " O"na"\n"
+                               }' >> ${build}/corrige.tmp
+    
+    if [ ${ECgetA} -eq 2 ]
+    then
+        cat  ${build}/shuf_ans1 | tr "123456789" "ABCDEFGHI" > tmp_shuf_ans1
+    fi
+    [ ${ECgetA} -eq 2 ] &&  paste -d ""  tmp_shuf_ans1 ${build}/shuf_ans2 >> ${build}/corrige.tmp 
+    # corrige.tex
+    grep -P "(?<=[A-Z]\.).*" ${quest} | grep "✓" | \
+        awk -v n=${numQ} 'BEGIN{
+                                if (n==1) {
+                                    printf "\\noindent\\textbf{Q."n"} "
+                                          } 
+                                else {
+                                    printf "\\textbf{Q."n"} "
+                                     }
+                               }
+                               {
+                                  printf $1" "
+                               } 
+                        ENDFILE{ 
+                                printf "\\newline\n"
+                               }' >> ${build}/corrige.tex
+    
+    # création du fichier corrige.tex (qui sera placé à la fin du document tex principale)
+    if [ ${ECgetA} -eq 2 ] 
+    then
+        bin/genAppariement.py ${build}/Acorrige.tex < ${quest} >> ${build}/corrige.tex 
+        echo "\\newline" >> build/corrige.tex
+    fi
+# -----------------------------------------------------------------------------
+#                               VERSION ENONCE 
+# -----------------------------------------------------------------------------
+else
+    if [ ${ECgetA} -eq 1 ] #CM (choix multiple) 
+    then
+        grep -P "(?<=[A-Z]\. ).*" ${quest} |  
+        awk '{        
+                printf "\\indent"
+                if ($NF=="✓") {NF--}
+                if ($NF=="\\newline") { wnew=1} else {wnew=0}
+                printf "\\textbf{"$1"} ";
+                $1="";
+                printf $0"\\hfill\n"
+            }ENDFILE{if (wnew==0) {printf "\\newline\n"}}'
+    elif [ ${ECgetA} -eq 2 ] #A (appariemment) 
+    then
+        bin/genAppariement.py < ${quest}
+    fi
+fi

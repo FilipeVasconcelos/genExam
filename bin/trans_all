@@ -1,0 +1,19 @@
+#!/bin/bash
+# -------------
+# description :  Applique le script bin/trans sur tous les fichiers de qtex 
+# -------------
+# boucle sur tous les fichiers tex_
+for file in qtex/*.tex_
+do
+    echo $file
+    base=$(basename $file)
+    # souci sur un fichier 
+    if [ $base = "regex_7.tex_" ] 
+    then
+            continue
+    fi
+    file_en=${base::-5}_en.tex_
+    # traduction avec l'api google translate
+    bin/trans $file > qtex_en/${file_en}
+    echo done
+done

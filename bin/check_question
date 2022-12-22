@@ -1,0 +1,20 @@
+#!/bin/bash
+# -------------
+# description : Vérifie si une question passée en paramètre est bien composé
+#               de 7 lignes (Q+ANS+4 reponses+TAGS)
+# -------------
+source bin/global.sh
+file=$1
+if [ -f ${file} ]
+then
+    nlfr=$(wc -l ${file} | cut -d " " -f 1 2> /dev/null)
+    if [ ${nlfr} -ne 7 ]
+    then
+        echo "problème avec le fichier ${file} (ligne de trop)"
+        exit 1
+    fi
+    exit 0
+else
+    errorFileNotFound ${file}
+    exit 1
+fi

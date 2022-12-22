@@ -1,0 +1,7 @@
+#Q Quel est le but du script \texttt{genExam} ?
+#ANS CM
+A. Générer un document pdf d'examen à partir d'une banque de questions \newline ✓
+B. Faire le café \newline
+C. Permet de ne pas aller en cours et de lancer un script le jour de l'examen \newline 
+D. Un prétexte pour faire du bash  \newline ✓
+#TAGS #tag1 #tag2

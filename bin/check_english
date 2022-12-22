@@ -1,0 +1,19 @@
+#!/bin/bash
+# -------------
+# description : Vérifie que toutes les questions dans qtex ont un équivalent
+#               dans qtex_english. On vérifie également le nombre de lignes 
+#               du fichier.
+# -------------
+for file in qtex/*.tex_
+do
+    bfile=$(basename ${file})
+    fileEN=${bfile::-5}_en.tex_
+    if [ ! -f qtex_english/${fileEN} ] 
+    then 
+        echo "la version anglaise est manquante" ${bfile} 
+        exit 1
+    else
+        bin/check_question qtex_english/${fileEN}
+    fi
+done
+echo "banque de questions OK (english version)"

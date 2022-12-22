@@ -1,0 +1,12 @@
+#!/bin/bash
+# -------------
+# description : Affiche les réponses d'une question tex_ passée en paramètre 
+#               et retourne (code erreur) 1 ou 2 selon que celle-ci est 
+#               respectivement une question de type CM ou A.
+# -------------
+source bin/global.sh
+errorArg 1 $# $0 "(une question format tex_)"
+grep -P "(?<=[A-Z]\.).*" $1
+typeQ=$(bin/getANS $1 | awk '{print $2}')
+[ "${typeQ}" = "CM" ] && exit 1 
+[ "${typeQ}" = "A" ]  && exit 2 

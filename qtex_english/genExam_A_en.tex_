@@ -1,0 +1,7 @@
+#Q Associate each script with a task
+#ANS A 
+A. \texttt{genExam} 1. Generate exam pdf document from question bank
+B. \texttt{getTAGS} 2. Extract the TAGS line from a question passed as a parameter
+C. \texttt{aleaQ} 3. Mixes the propositions of a question passed as a parameter
+D. \texttt{getQ} 4. Returns the question string passed as parameter
+#TAGS #tag1 #tag2

@@ -1,0 +1,26 @@
+#!/bin/bash
+# -------------
+# description : à tester 
+# -------------
+reps=()
+Ns=()
+outrep=$1
+rm ${outrep}/*
+shift
+while [ $# -gt 0 ]
+do
+    reps+=($1)
+    Ns+=($2)
+    shift
+    shift
+done
+echo ${reps[@]}
+echo ${Ns[@]}
+for i in "${!reps[@]}"
+do
+    lsr=$(ls -d ${reps[i]}/*.tex_ |sort -R |tail -${Ns[i]})
+    for f in ${lsr}
+    do
+        cp $f ${outrep}/
+    done
+done

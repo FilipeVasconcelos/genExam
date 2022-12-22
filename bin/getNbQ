@@ -1,0 +1,5 @@
+#!/bin/bash
+source bin/global.sh
+errorArg 1 $# $0 "<rep_qtex>"
+rep=$1
+echo "nombre de questions dans ${rep} :" $(ls -l ${rep}/*.tex_ | wc -l)

@@ -1,0 +1,7 @@
+#!/bin/bash
+# -------------
+# description : extrait la ligne des TAGS d'un question passé en paramètre
+# -------------
+source bin/global.sh
+errorArg 1 $# $0 "(une question)"
+grep "#TAGS" $1

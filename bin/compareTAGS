@@ -1,0 +1,13 @@
+#!/bin/bash
+# -------------
+# description : Vérifie si les TAGS sont identiques entre la base de données en
+#               français et en anglais.
+# -------------
+for file in qtex/*.tex_
+do
+    bfile=$(basename ${file})
+    fileEN=${bfile::-5}_en.tex_
+    frtags=$(bin/getTAGS qtex/${bfile})
+    entags=$(bin/getTAGS qtex_english/${fileEN})
+    [ "${frtags}" != "${entags}" ] && echo "tags diffèrent" ${bfile} 
+done

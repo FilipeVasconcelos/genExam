@@ -1,0 +1,38 @@
+#!/bin/bash
+# -------------
+# description : mélange les propositions d'une question passé en paramètre pour 
+#               les deux types de questions envisagés (CM, A) 
+# -------------
+source bin/global.sh
+errorArg 1 $# $0 "<tex_>"
+build=${PWD}/build
+quest=$1
+bin/getQ ${quest}
+bin/getANS ${quest}
+bin/getA ${quest} > tmp 
+ECgetA=$?
+seq $(cat tmp | wc -l) > tmp_shuf
+
+if [ ${ECgetA} -eq 1 ] #CM (choix multiple) 
+then
+    shuf tmp_shuf > ${build}/shuf_ans1
+    bin/getA ${quest} | grep -oP "(?<=[A-Z]\.).*" > tmp_ans1
+    paste -d " " ${build}/shuf_ans1 tmp_ans1 | sort | cut -d " " -f 3- | \
+    awk 'BEGIN{split("A B C D E F G H I",a)} {print a[NR]". "$0}'
+elif [ ${ECgetA} -eq 2 ] #A (appariemment) 
+then
+    # shuf la colonne de gauche
+    shuf tmp_shuf > ${build}/shuf_ans1
+    cat tmp | grep -oP "(.*)(?=[1-9]\.)" > tmp_ans1
+    paste -d " " ${build}/shuf_ans1 tmp_ans1 | sort | cut -d " " -f 3- | \
+    awk 'BEGIN{split("A B C D E F G H I",a)} {print a[NR]". "$0}' > tmp_ans11
+    # shuf la colonne de droite 
+    shuf tmp_shuf > ${build}/shuf_ans2
+    cat tmp | grep -oP "(?<=[1-9]\.)(.*)" >  tmp_ans2
+    paste -d " " ${build}/shuf_ans2 tmp_ans2 | sort | cut -d " " -f 3- | \
+    awk 'BEGIN{split("1 2 3 4 5 6 7 8 9",a)} {print a[NR]". "$0}' > tmp_ans22
+    # affichage vers stdout
+    paste -d " " tmp_ans11 tmp_ans22 
+fi
+bin/getTAGS ${quest}
+rm tmp*

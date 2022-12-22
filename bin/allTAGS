@@ -1,0 +1,28 @@
+#!/bin/bash
+# -------------
+# description : Affiche tous les tags de toutes les questions présentes dans
+#               un repertoire ou un fichier.
+#               Affiche si une question ne comporte pas de tag ou un seul.
+# -------------
+source bin/global.sh
+errorArg 1 $# $0 "(répertoire de questions ou fichier)"
+if [ -f $1 ]
+then
+    for file in $(cat $1)
+    do
+        rp=$(realpath qtex/${file})
+        echo ${rp} $(bin/getTAGS ${rp})
+        ntag=$(($(echo "$(bin/getTAGS ${rp})" | wc -w) -1 ))
+        [ ${ntag} -eq 0 ] && echo -e ${RED}"no tag" ${file} ${NC} 
+        [ ${ntag} -eq 1 ] && echo -e ${RED}"only one tag" ${file} ${NC} 
+    done
+else 
+    for file in $1/*.tex_
+    do
+        echo ${file} $(bin/getTAGS ${file})
+        ntag=$(($(echo "$(bin/getTAGS ${file})" | wc -w) -1 ))
+        [ ${ntag} -eq 0 ] && echo -e ${RED}"no tag" ${file} ${NC} 
+        [ ${ntag} -eq 1 ] && echo -e ${RED}"only one tag" ${file} ${NC} 
+
+    done
+fi

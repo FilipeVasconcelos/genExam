@@ -1,0 +1,15 @@
+#!/bin/bash
+# -------------
+# description : Copie les TAGS de la base de données en français et à celle en 
+#               en anglais. Ainsi il ne suffit que de maintenir les TAGS des
+#               questions en français.
+# -------------
+for file in qtex/*.tex_
+do
+    bfile=$(basename ${file})
+    fileEN=${bfile::-5}_en.tex_
+    head -n -1 qtex_english/${fileEN} > tmp
+    bin/getTAGS qtex/${bfile} >> tmp
+    cp tmp qtex_english/${fileEN}
+done
+rm tmp

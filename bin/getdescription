@@ -1,0 +1,18 @@
+#!/bin/bash
+# -------------
+# description : Retourne la description d'un script passé en paramètre 
+# -------------
+source bin/global.sh
+errorArg 1 $# $0 "<script>"
+script=$1
+firstline=$(grep -nE "^# -------------$" $script | cut -c 1 | head -n1)
+lastline=$(grep -nE  "^# -------------$" $script | cut -c 1 | tail -n1)
+kline=1
+while read line
+do
+    if [ ${kline} -ge ${firstline} ] && [ ${kline} -le ${lastline} ]
+    then
+        echo "$line"
+    fi
+    kline=$((kline+1))
+done < ${script}

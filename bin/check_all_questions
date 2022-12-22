@@ -1,0 +1,10 @@
+#!/bin/bash
+# -------------
+# description : 
+# -------------
+rep=$1
+for file in $rep/*.tex_
+do
+    bin/check_question ${file}
+done
+echo "banque de questions dans ${rep} OK (nombre de lignes)"

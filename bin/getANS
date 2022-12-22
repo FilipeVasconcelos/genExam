@@ -1,0 +1,7 @@
+#!/bin/bash
+# -------------
+# description : grep sur la ligne #ANS d'une question tex_ 
+# -------------
+source bin/global.sh
+errorArg 1 $# $0 "(une question format tex_)"
+grep "#ANS" $1

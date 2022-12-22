@@ -1,0 +1,7 @@
+#!/bin/bash
+# -------------
+# description : renvoie la chaine de la question passée en paramètre
+# -------------
+source bin/global.sh
+errorArg 1 $# $0 "(une question format tex_)"
+grep -P "(?<=\#Q ).*" $1
