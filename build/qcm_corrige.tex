@@ -1,0 +1,168 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel}
+\usepackage[top=2cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{fancyvrb}
+\usepackage{qcmexoq}
+\usepackage{tikz,pgf}
+\usepackage{environ}
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{\userID}
+\chead{\textbf{\Large Final Exam}}
+\rhead{\course \\ 6 Janvier 2023}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+\usepackage{textcomp}
+%\newcommand\course{ESME __SITE__ -- UNIX}
+\newcommand\course{UNIX}
+\newcommand\hwnumber{1}
+\newcommand\userID{ESME}
+\newcommand\tr{\textquotesingle}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{\textsc{INGE1 -- UNIX}\\
+    \emph{Final Exam} \\
+    Duration : 2h
+}
+\date{6 Janvier 2023}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+\thispagestyle{empty}
+\begin{figure}[!h]
+    \centering
+%    \includegraphics[width=0.7\textwidth]{fig/ESME_LOGO_VILLES_QUADRI_2021.jpg}
+\end{figure}
+
+\vfill
+{\noindent\Large \textbf{\textsc{LastName, FirstName}}}\\[1cm]
+\rule{0.8\textwidth}{1pt}
+
+\vfill
+\noindent\fbox{\parbox{\linewidth\fboxrule\fboxsep}{\textbf{Notes are not allowed.}
+        \textbf{Calculators are not authorized.}
+}}
+\newpage
+
+\section*{Instructions}
+\begin{itemize}
+    \item In the case of multiple-choice questions: please answer by 
+          circling the correct answer(s). 
+    \item In the case of matching questions: draw a line between the 
+          statements and their answers. 
+\end{itemize}
+\section*{Questions}
+\question{Associate each script with a task}\\[0.2cm]
+\indent\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}
+
+    \node[text width=39.34398mm,align=left] (a1) at (0,0) {\textbf{ A. } \texttt{getTAGS}   };
+    \node (b1) at ($(a1.east)+(1,0)$) {};
+    \node (c1) at ($(b1.east)+(2,0)$) {};
+    \draw[thick,outer sep=8mm] (b1) circle(0.5ex);
+    \draw[thick,outer sep=8mm] (c1) circle(0.5ex);
+    \node[text width=101.38641000000001mm,align = right] (d1) at ($(c1.east)+(6,0)$) {\textbf{ 1. } Generate exam pdf document from question bank };
+
+    \node[text width=39.34398mm,below=0.75cm of a1.center,anchor=center,align=left] (a2) {\textbf{ B. } \texttt{genExam}   };
+    \node[below=0.75cm of b1.center,anchor=center] (b2) {};
+    \node[below=0.75cm of c1.center,anchor=center] (c2) {};
+    \draw[thick,outer sep=8mm] (b2) circle(0.5ex);
+    \draw[thick,outer sep=8mm] (c2) circle(0.5ex);
+    \node[below=0.75cm of d1.center,anchor=center,text width=101.38641000000001mm,align = right] (d2) {\textbf{ 2. } Returns the question string passed as parameter };
+
+    \node[text width=39.34398mm,below=0.75cm of a2.center,anchor=center,align=left] (a3) {\textbf{ C. } \texttt{getQ}   };
+    \node[below=0.75cm of b2.center,anchor=center] (b3) {};
+    \node[below=0.75cm of c2.center,anchor=center] (c3) {};
+    \draw[thick,outer sep=8mm] (b3) circle(0.5ex);
+    \draw[thick,outer sep=8mm] (c3) circle(0.5ex);
+    \node[below=0.75cm of d2.center,anchor=center,text width=101.38641000000001mm,align = right] (d3) {\textbf{ 3. } Extract the TAGS line from a question passed as a parameter };
+
+    \node[text width=39.34398mm,below=0.75cm of a3.center,anchor=center,align=left] (a4) {\textbf{ D. } \texttt{aleaQ}   };
+    \node[below=0.75cm of b3.center,anchor=center] (b4) {};
+    \node[below=0.75cm of c3.center,anchor=center] (c4) {};
+    \draw[thick,outer sep=8mm] (b4) circle(0.5ex);
+    \draw[thick,outer sep=8mm] (c4) circle(0.5ex);
+    \node[below=0.75cm of d3.center,anchor=center,text width=101.38641000000001mm,align = right] (d4) {\textbf{ 4. } Mixes the propositions of a question passed as a parameter };
+
+\draw[very thick] (b2) -- (c1);
+\draw[very thick] (b1) -- (c3);
+\draw[very thick] (b4) -- (c4);
+\draw[very thick] (b3) -- (c2);
+
+\end{tikzpicture}
+}%
+\question{ What is the purpose of the \texttt{genExam} script?}\\[0.2cm]
+\indent\textbf{A.} {\color{OliveGreen}  An excuse to bash {\large\cmark} }\newline
+\indent\textbf{B.} {\color{BrickRed}    Make coffee {\large\xmark} }\newline
+\indent\textbf{C.} {\color{BrickRed}    Allows you to skip class and run a script on exam day {\large\xmark} }\newline
+\indent\textbf{D.} {\color{OliveGreen}  Generate an exam from a question bank {\large\cmark} }\newline
+\,\clearpage
+\section*{Corrigé (Résumé)}
+\noindent\textbf{Q.1} \newline
+\indent\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}
+
+    \node[text width=39.34398mm,align=left] (a1) at (0,0) {\textbf{ A. } \texttt{getTAGS}   };
+    \node (b1) at ($(a1.east)+(1,0)$) {};
+    \node (c1) at ($(b1.east)+(2,0)$) {};
+    \draw[thick,outer sep=8mm] (b1) circle(0.5ex);
+    \draw[thick,outer sep=8mm] (c1) circle(0.5ex);
+    \node[text width=101.38641000000001mm,align = right] (d1) at ($(c1.east)+(6,0)$) {\textbf{ 1. } Generate exam pdf document from question bank };
+
+    \node[text width=39.34398mm,below=0.75cm of a1.center,anchor=center,align=left] (a2) {\textbf{ B. } \texttt{genExam}   };
+    \node[below=0.75cm of b1.center,anchor=center] (b2) {};
+    \node[below=0.75cm of c1.center,anchor=center] (c2) {};
+    \draw[thick,outer sep=8mm] (b2) circle(0.5ex);
+    \draw[thick,outer sep=8mm] (c2) circle(0.5ex);
+    \node[below=0.75cm of d1.center,anchor=center,text width=101.38641000000001mm,align = right] (d2) {\textbf{ 2. } Returns the question string passed as parameter };
+
+    \node[text width=39.34398mm,below=0.75cm of a2.center,anchor=center,align=left] (a3) {\textbf{ C. } \texttt{getQ}   };
+    \node[below=0.75cm of b2.center,anchor=center] (b3) {};
+    \node[below=0.75cm of c2.center,anchor=center] (c3) {};
+    \draw[thick,outer sep=8mm] (b3) circle(0.5ex);
+    \draw[thick,outer sep=8mm] (c3) circle(0.5ex);
+    \node[below=0.75cm of d2.center,anchor=center,text width=101.38641000000001mm,align = right] (d3) {\textbf{ 3. } Extract the TAGS line from a question passed as a parameter };
+
+    \node[text width=39.34398mm,below=0.75cm of a3.center,anchor=center,align=left] (a4) {\textbf{ D. } \texttt{aleaQ}   };
+    \node[below=0.75cm of b3.center,anchor=center] (b4) {};
+    \node[below=0.75cm of c3.center,anchor=center] (c4) {};
+    \draw[thick,outer sep=8mm] (b4) circle(0.5ex);
+    \draw[thick,outer sep=8mm] (c4) circle(0.5ex);
+    \node[below=0.75cm of d3.center,anchor=center,text width=101.38641000000001mm,align = right] (d4) {\textbf{ 4. } Mixes the propositions of a question passed as a parameter };
+
+\draw[very thick] (b2) -- (c1);
+\draw[very thick] (b1) -- (c3);
+\draw[very thick] (b4) -- (c4);
+\draw[very thick] (b3) -- (c2);
+
+\end{tikzpicture}
+}%
+\newline
+\textbf{Q.2} A. D. \newline
+\end{document}

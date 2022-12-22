@@ -1,0 +1,42 @@
+\section*{Corrigé (Résumé)}
+\noindent\textbf{Q.1} \newline
+\indent\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}
+
+    \node[text width=39.34398mm,align=left] (a1) at (0,0) {\textbf{ A. } \texttt{getTAGS}   };
+    \node (b1) at ($(a1.east)+(1,0)$) {};
+    \node (c1) at ($(b1.east)+(2,0)$) {};
+    \draw[thick,outer sep=8mm] (b1) circle(0.5ex);
+    \draw[thick,outer sep=8mm] (c1) circle(0.5ex);
+    \node[text width=101.38641000000001mm,align = right] (d1) at ($(c1.east)+(6,0)$) {\textbf{ 1. } Generate exam pdf document from question bank };
+
+    \node[text width=39.34398mm,below=0.75cm of a1.center,anchor=center,align=left] (a2) {\textbf{ B. } \texttt{genExam}   };
+    \node[below=0.75cm of b1.center,anchor=center] (b2) {};
+    \node[below=0.75cm of c1.center,anchor=center] (c2) {};
+    \draw[thick,outer sep=8mm] (b2) circle(0.5ex);
+    \draw[thick,outer sep=8mm] (c2) circle(0.5ex);
+    \node[below=0.75cm of d1.center,anchor=center,text width=101.38641000000001mm,align = right] (d2) {\textbf{ 2. } Returns the question string passed as parameter };
+
+    \node[text width=39.34398mm,below=0.75cm of a2.center,anchor=center,align=left] (a3) {\textbf{ C. } \texttt{getQ}   };
+    \node[below=0.75cm of b2.center,anchor=center] (b3) {};
+    \node[below=0.75cm of c2.center,anchor=center] (c3) {};
+    \draw[thick,outer sep=8mm] (b3) circle(0.5ex);
+    \draw[thick,outer sep=8mm] (c3) circle(0.5ex);
+    \node[below=0.75cm of d2.center,anchor=center,text width=101.38641000000001mm,align = right] (d3) {\textbf{ 3. } Extract the TAGS line from a question passed as a parameter };
+
+    \node[text width=39.34398mm,below=0.75cm of a3.center,anchor=center,align=left] (a4) {\textbf{ D. } \texttt{aleaQ}   };
+    \node[below=0.75cm of b3.center,anchor=center] (b4) {};
+    \node[below=0.75cm of c3.center,anchor=center] (c4) {};
+    \draw[thick,outer sep=8mm] (b4) circle(0.5ex);
+    \draw[thick,outer sep=8mm] (c4) circle(0.5ex);
+    \node[below=0.75cm of d3.center,anchor=center,text width=101.38641000000001mm,align = right] (d4) {\textbf{ 4. } Mixes the propositions of a question passed as a parameter };
+
+\draw[very thick] (b2) -- (c1);
+\draw[very thick] (b1) -- (c3);
+\draw[very thick] (b4) -- (c4);
+\draw[very thick] (b3) -- (c2);
+
+\end{tikzpicture}
+}%
+\newline
+\textbf{Q.2} A. D. \newline
