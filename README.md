@@ -6,9 +6,10 @@ Le fonctionnement globale est décrit par le diagramme suivant :
 ``` 
        .tex_ => .tex => .pdf
 ```
-Un ensemble de questions dans un format spécifique `tex_` sont ajoutés à un
-fichier template `tex` de question individuelles pour enrichir un fichier `tex` 
-global avant d'être compilé pour obtenir le fichier `pdf` final.
+Un ensemble de questions dans un format spécifique `tex_` sont filtrés pour
+produire un fichier `tex` de questions individuelles à partir d'un template afin 
+d'enrichir un fichier `tex` global. Ce dernier est finalement compilé pour obtenir 
+le fichier `pdf` final.
 
 ### Exemples de documents générés par `genExam` au format $\LaTeX$ :
 
