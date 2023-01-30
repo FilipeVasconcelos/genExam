@@ -1,0 +1,6 @@
+#!/bin/bash
+# -------------
+# description : Retourne le texte et uniquement le texte d'une question passée
+#               en paramètre. 
+# -------------
+bin/getQ $1 | sed -e 's/^#Q \(.*\)/\1/g'

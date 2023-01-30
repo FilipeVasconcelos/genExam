@@ -1,0 +1,5 @@
+#!/bin/bash
+for texam in corrige enonce
+do
+    gs -dBATCH -dNOPAUSE -sDEVICE=png16m -r600 -dDownScaleFactor=2 -sOutputFile=exemple_${texam}_genExam.png -dFirstPage=2 -dLastPage=2 ../pdf/UNIX_INGE1_2022-2023_examen_final_${texam}.pdf
+done

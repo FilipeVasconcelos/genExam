@@ -1,0 +1,36 @@
+#!/bin/bash
+# -------------
+# description : Génère un fichier xml de toutes les questions du répertoire 
+#               de questions passé en paramètre. Le nom du fichier de sortie est 
+#               également passé en paramètre. 
+#               Ce script vérifie si le fichier *.tex_ a été modifié et appelle
+#               genxml seulement si c'est le cas.
+# -------------
+source bin/global.sh
+errorArg 2 $# $0 "<qtex> <output.xml>"
+qtex=$1
+xmloutput=$2
+# header du fichier xml de sortie
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > ${xmloutput}
+echo "<quiz>" >>  ${xmloutput}
+for file in ${qtex}/*.tex_
+do
+    bse=$(basename -s .tex_ ${file})
+    xmlfile=xml/${bse}.xml
+    # test si les fichiers md5 et xml existent et que le fichier 
+    # source tex_ n'a pas changé
+    if [ -f  ${file}.md5 ] && [ -f ${xmlfile} ] && md5sum --status -c ${file}.md5
+    then
+        cat ${xmlfile} >> ${xmloutput}
+    else
+        echo "---------------------------"
+        echo "tex_ => xml for ${file}"
+        echo "---------------------------"
+        bin/genxml ${file}
+        md5sum ${file} > ${file}.md5
+        cat ${xmlfile} >> ${xmloutput}
+    fi
+done
+# tail du fichier xml de sortie
+echo "</quiz>" >> ${xmloutput}
+echo "${xmloutput} ready"

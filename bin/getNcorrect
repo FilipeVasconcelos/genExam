@@ -1,0 +1,5 @@
+#!/bin/bash
+# -------------
+# description : Affiche le nombre de bonnes réponses  
+# -------------
+bin/getA $1 | grep "✓" |wc -l

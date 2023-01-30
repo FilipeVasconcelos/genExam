@@ -1,0 +1,23 @@
+#!/bin/bash
+# -------------
+# description :  Ce script filtre et transforme une chaine de caractères 
+#                comportant des instructions LaTeX vers des balises html
+# -------------
+sed -E 's/\\\,//g' $1 |                                 # \, -> enlever les espaces
+sed -E 's/\\\&/\&/g' |                                  # \& -> &
+sed -E 's/\{\}//g' |                                    # {} -> enlever
+sed -E 's/\\\{/AABBCC/g' | sed -E 's/\\\}/CCBBAA/g' |   # transformer \} -> AABBCC  \} -> CCBBAA
+sed -E 's/\\\$/\$/g'  |                                 # \$ -> $
+sed -E 's/\\\#/\#/g'  |                                 # \# -> #
+sed -E 's/\\\%/%/g'   |                                 # \% -> %
+sed -E 's/\\_/_/g' |                                    # \_ -> _
+sed -E 's/\\textasciitilde/~/g' |                       # \textasciitilde -> ~
+sed -E "s/\\\textquotesingle/\'/g" |                    # \textquotesingle -> '
+sed -E 's/\\textbackslash/\\/g' |                       # \\textbackslash -> \
+sed -E 's/\\textasciicircum/\^/g' |                     # \textasciicircum -> ^
+sed -E "s/\\\tr/\'/g" |                                 # \tr -> ' (raccourci)
+sed -E 's/\\textbf\{([^}]*)\}/<strong>\1<\/strong>/g' | # \textbf{group} -> <strong>groupe</strong>
+sed -E 's/\\verb\?([^\?]*)\?/<tt>\1<\/tt>/g' |          # \verb?group? -> <tt>group</tt>
+sed -E 's/\\texttt\{([^}]*)\}/<tt>\1<\/tt>/g' |         # \texttt{group} -> <tt>group</tt>
+sed -E 's/AABBCC/{/g' |                                 # {} -> enlever
+sed -E 's/CCBBAA/}/g'                                   # {} -> enlever

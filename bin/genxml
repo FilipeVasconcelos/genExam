@@ -1,0 +1,117 @@
+#!/bin/bash
+# -------------
+# description : Ce script retourne une question au format xml à partir
+#               d'une question au format tex_
+# -------------
+ques=$1
+textQTEX=$(bin/textQ $ques)
+textQHTML=$(echo ${textQTEX} | bin/tex2html)
+typeCM=false
+typeA=false
+[ "$(bin/getANS ${ques})" == "#ANS CM" ] && typeCM=true
+[ "$(bin/getANS ${ques})" == "#ANS A" ] && typeA=true
+bse=$(basename -s .tex_ ${ques})
+name=$(echo ${bse} | tr _ " " | sed -e 's/\(.*\) \([[:digit:]]\)/\1 (\2)/g')
+xml=xml/${bse}.xml
+echo "---------------------------------------------------------"
+echo "XML file : ${xml}"
+echo "---------------------------------------------------------"
+echo "tex_     : ${ques}"
+echo "basename : ${bse}"
+echo "name     : ${name}"
+echo "Q        : ${textQTEX}"
+echo "Q (html) : ${textQHTML}"
+if [ "${typeCM}" == "true" ]
+then
+    echo "<question type=\"multichoice\">" > ${xml} 
+    echo "typeQ    : CM"
+elif [ "${typeA}" == "true" ]
+then
+    echo "<question type=\"matching\">" > ${xml}
+    echo "typeQ    : A"
+fi
+echo "<name>"  >> ${xml}
+echo "<text>${bse}</text>" >> ${xml}
+echo "</name>" >> ${xml}
+echo "<questiontext format=\"html\">" >> ${xml}
+echo "<text><![CDATA[<p style=\"text-align: left;\">${textQHTML}</p>]]></text>" >> ${xml}
+echo "</questiontext>" >> ${xml}
+echo "<generalfeedback format=\"html\">" >> ${xml}
+echo "      <text></text>" >> ${xml}
+echo "</generalfeedback>" >> ${xml}
+echo "<defaultgrade>1.0000000</defaultgrade>" >> ${xml}
+echo "<penalty>0.3333333</penalty>" >> ${xml}
+echo "<hidden>0</hidden>" >> ${xml}
+echo "<idnumber></idnumber>" >> ${xml}
+if [ $(bin/getNcorrect $ques) -gt 1 ] && [ ${typeCM} == "true" ]
+then
+    echo "<single>false</single>" >> ${xml}
+else
+    echo "<single>true</single>" >> ${xml}
+fi
+echo "<shuffleanswers>true</shuffleanswers>" >> ${xml}
+echo "<answernumbering>none</answernumbering>" >> ${xml}
+echo "<answernumbering>ABCD</answernumbering>"  >> ${xml}
+echo "<showstandardinstruction>0</showstandardinstruction>" >> ${xml}
+echo "   <correctfeedback format=\"html\">" >> ${xml}
+echo "     <text>Votre réponse est correcte.</text>" >> ${xml}
+echo "   </correctfeedback>" >> ${xml}
+echo "   <partiallycorrectfeedback format=\"html\">" >> ${xml}
+echo "     <text>Votre réponse est partiellement correcte.</text>" >> ${xml}
+echo "   </partiallycorrectfeedback>" >> ${xml}
+echo "   <incorrectfeedback format=\"html\">" >> ${xml}
+echo "     <text>Votre réponse est incorrecte.</text>" >> ${xml}
+echo "   </incorrectfeedback>" >> ${xml}
+echo "    <shownumcorrect/>" >> ${xml}
+
+if [ ${typeCM} == "true" ]
+then
+    float_scale=6
+    nc=$(bin/getNcorrect ${ques})
+    fraction=$(awk -v scale=$floatscale -v n=$nc 'BEGIN { printf "%.5f\n", (1/n)*100 }')
+    for ans in $(seq 4)
+    do
+        correct=""
+        correct=$(bin/getA ${ques} | head -n ${ans} | tail -n1 | grep "✓")
+        if [ -z "${correct}" ]
+        then
+            echo " <answer fraction=\"0\" format=\"html\">" >> ${xml}
+        else
+            echo " <answer fraction=\"$fraction\" format=\"html\">" >> ${xml}
+        fi
+        ATEX=$(bin/getA ${ques} | head -n ${ans} | tail -n1 | sed -e "s/[A-D]\. \(.*\) \\\newline *✓*/\1/g") 
+        AHTML=$(echo ${ATEX} | bin/tex2html)
+        echo TEX_  : ${ATEX}
+        echo HTML  :    ${AHTML}
+        echo "<text><![CDATA[$AHTML]]></text>" >>  ${xml}
+        echo "<feedback format=\"html\">" >>  ${xml}
+        echo "<text></text>"  >>  ${xml}
+        echo "</feedback>" >>  ${xml}
+        echo "</answer>" >> ${xml}
+    done
+elif [ ${typeA} == "true" ]
+then
+    for ans in $(seq 4)
+    do
+        echo "$(bin/getA ${ques} | head -n ${ans} | tail -n1)"
+        text=$(bin/getA ${ques} | head -n ${ans} | tail -n1 | sed -e 's/[A-Z]\. \(.*\) [1-9]\..*/\1/g' | bin/tex2html)
+        answer=$(bin/getA ${ques} | head -n ${ans} | tail -n1 | sed -e 's/[A-Z]\..*[1-9]\. \(.*\)/\1/g' | bin/removetex)
+        echo "TEXT HTML : ${text}"
+        echo "ANS  HTML : ${answer}"
+        echo "  <subquestion format=\"html\">" >>  ${xml}
+        echo "  <text><![CDATA[${text}]]></text>" >> ${xml}
+        echo "          <answer>" >> ${xml}
+        echo "          <text>${answer}</text>" >> ${xml}
+        echo "          </answer>" >> ${xml}
+        echo "  </subquestion>" >> ${xml}
+    done
+fi
+echo "<tags>" >> ${xml}
+for tag in $(bin/getTAGS ${ques}| cut -d " " -f 2-)
+do
+    rtag=$(echo $tag |tr -d "#") 
+    echo "      <tag><text>${rtag}</text>" >> ${xml}
+    echo "</tag>" >> ${xml}
+done
+echo "</tags>" >> ${xml}
+echo "</question>" >> ${xml}

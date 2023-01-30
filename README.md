@@ -11,15 +11,14 @@ produire un fichier `tex` de questions individuelles à partir d'un template afi
 d'enrichir un fichier `tex` global. Ce dernier est finalement compilé pour obtenir 
 le fichier `pdf` final.
 
-### Exemples de documents générés par `genExam` au format $\LaTeX$ :
+## Exemples de documents générés par `genExam` au format $\LaTeX$ :
 
-#### Enoncé : 
+### Enoncé : 
 ![exemple_enonce_genExam](https://github.com/FilipeVasconcelos/genExam/blob/main/fig/exemple_enonce_genExam.png)
-#### Corrigé :
+### Corrigé :
 ![exemple_corrige_genExam](https://github.com/FilipeVasconcelos/genExam/blob/main/fig/exemple_corrige_genExam.png)
 
-
-### help :  
+## help :  
 
 L'option `--help` affiche l'ensemble des paramètres du script :
 ```bash
@@ -39,7 +38,7 @@ Usage : bin/genExam OPTIONS
 -d/--date   [date]   : date de l'examen (default = None)
 ```
 
-### Exemples d'appel :
+## Exemples d'appel :
 ```bash
 $ bin/genExam --nbQ 80 --examen="Examen final" --module=UNIX --promo=INGE1 --annee=2022-2023 --date="6 janvier 2023"
 ```
@@ -54,7 +53,7 @@ $ bin/genExam --english --nbQ 80 --examen="Final exam" --module=UNIX --promo=ING
 Il est possible de générer un examen à partir d'un fichier listant les questions 
 que l'on souhaite utiliser (option `--order`).
 
-### À propos de la banque de questions
+## À propos de la banque de questions
 
 La banque de questions est dans un format spécifique (extension `tex_`).
 
@@ -85,9 +84,9 @@ types questions/réponses :
 Les `<énoncé_i>` et `<réponse_i>` peuvent contenir des commandes $\LaTeX$. On
 terminera la ligne par `✓` pour selectionner la ou les bonnes réponses.
 
-#### Exemple de question de la banque de questions :
+### Exemple de question de la banque de questions :
 
-##### Choix Multiples
+#### Choix Multiples
 ```
 #Q Parmi les systèmes d'exploitation ci-dessous, lesquel(s) appartien(nent)t à la famille des systèmes Unix ?
 #ANS CM
@@ -107,7 +106,7 @@ C. \texttt{if ( \$x -gt \$y )} \newline
 D. None of them \newline
 #TAGS #if #script #variable #syntaxe #cours08
 ```
-##### Appariement 
+#### Appariement 
 
 ```
 #Q Associer la commande de filtre avec son résultat
@@ -127,6 +126,16 @@ B. \texttt{cat} 2. Concatenate files and print on the stdout
 C. \texttt{rm} 3. Remove files or directories
 D. \texttt{cp} 4. Copy files and directories
 #TAGS #commandesDeBase #ls #cat #rm #cp #cours01
+```
+
+## Transformer une question tex_ au format moodle
+
+Il est possible de transformer les questions de la banque de questions du format
+`.tex_` au format xml celui-ci pouvant être importé sur la platerforme Moodle.
+
+### Exemple d'appel du script moodle
+```
+$ bin/moodle qtex banque_question.xml
 ```
 
 # Credits

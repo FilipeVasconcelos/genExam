@@ -1,0 +1,6 @@
+#!/bin/bash
+# -------------
+# description :  Génère les fichiers xml des questions de qtex et qtex_english 
+# -------------
+bin/moodle qtex qtex_moodle.xml
+bin/moodle qtex_english qtex_english_moodle.xml
