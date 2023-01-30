@@ -133,7 +133,16 @@ D. \texttt{cp} 4. Copy files and directories
 Il est possible de transformer les questions de la banque de questions du format
 `.tex_` au format xml celui-ci pouvant être importé sur la platerforme Moodle.
 
-### Exemple d'appel du script moodle
+### Exemple d'appel des scripts genxml ou script moodle
+
+L'appel suivant produit un fichier `xml/genExam_A.xml` à partir d'une question
+au format `tex_` passé en paramètre
+```
+$ bin/genxml qtex/genExam_A.tex_
+```
+
+Pour produire un fichier xml complet `banque_question.xml` avec toutes les 
+questions d'un repertoire `qtex/`, vous pouvez utiliser la commande suivante :
 ```
 $ bin/moodle qtex banque_question.xml
 ```
