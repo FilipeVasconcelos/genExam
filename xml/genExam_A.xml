@@ -33,3 +33,38 @@
 </tag>
 </tags>
 </question>
+<name>
+<text>genExam_A</text>
+</name>
+<questiontext format="html">
+<text><![CDATA[<p style="text-align: left;">Associer chaque script à une tâche</p>]]></text>
+</questiontext>
+<generalfeedback format="html">
+      <text></text>
+</generalfeedback>
+<defaultgrade>1.0000000</defaultgrade>
+<penalty>0.3333333</penalty>
+<hidden>0</hidden>
+<idnumber></idnumber>
+<single>true</single>
+<shuffleanswers>true</shuffleanswers>
+<answernumbering>none</answernumbering>
+<answernumbering>ABCD</answernumbering>
+<showstandardinstruction>0</showstandardinstruction>
+   <correctfeedback format="html">
+     <text>Votre réponse est correcte.</text>
+   </correctfeedback>
+   <partiallycorrectfeedback format="html">
+     <text>Votre réponse est partiellement correcte.</text>
+   </partiallycorrectfeedback>
+   <incorrectfeedback format="html">
+     <text>Votre réponse est incorrecte.</text>
+   </incorrectfeedback>
+    <shownumcorrect/>
+<tags>
+      <tag><text>tag1</text>
+</tag>
+      <tag><text>tag2</text>
+</tag>
+</tags>
+</question>
