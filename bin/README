@@ -1,0 +1,188 @@
+#main script : bin/genExam
+
+aleaQ
+# -------------
+# description : mélange les propositions d'une question passé en paramètre pour
+#               les deux types de questions envisagés (CM, A)
+# -------------
+
+allTAGS
+# -------------
+# description : Affiche tous les tags de toutes les questions présentes dans
+#               un repertoire ou un fichier.
+#               Affiche si une question ne comporte pas de tag ou un seul.
+# -------------
+
+check_all_questions
+# -------------
+# description : vérifie toutes les questions du répertoire passé en paramètre
+# -------------
+
+check_english
+# -------------
+# description : Vérifie que toutes les questions dans qtex ont un équivalent
+#               dans qtex_english. On vérifie également le nombre de lignes
+#               du fichier.
+# -------------
+
+check_question
+# -------------
+# description : Vérifie si une question passée en paramètre est bien composé
+#               de 7 lignes (Q+ANS+4 reponses+TAGS)
+# -------------
+
+checkrepo
+
+compareTAGS
+# -------------
+# description : Vérifie si les TAGS sont identiques entre la base de données en
+#               français et en anglais.
+# -------------
+
+genAppariement.py
+# -------------
+# description : Retourne le code LaTeX pour le tikzpicture d'une question de type
+#               appariement (A). Prend une question dans l'entrée standard.
+# -------------
+
+genREADME
+# -------------
+# description : Ce script génère le fichier README à partir des descriptions
+#               de tous les scripts se trouvant dans bin/
+# -------------
+
+genxml
+# -------------
+# description : Ce script retourne une question au format xml à partir
+#               d'une question au format tex_
+# -------------
+
+getA
+# -------------
+# description : Affiche les réponses d'une question tex_ passée en paramètre
+#               et retourne (code erreur) 1 ou 2 selon que celle-ci est
+#               respectivement une question de type CM ou A.
+# -------------
+
+getANS
+# -------------
+# description : grep sur la ligne #ANS d'une question tex_
+# -------------
+
+getNbQ
+# -------------
+# description : Affiche le nombre de questions dans le repertoire passé en
+#               paramètre
+# -------------
+
+getNcorrect
+# -------------
+# description : Affiche le nombre de bonnes réponses
+# -------------
+
+getQ
+# -------------
+# description : renvoie la chaine de la question passée en paramètre
+# -------------
+
+getTAGS
+# -------------
+# description : extrait la ligne des TAGS d'un question passé en paramètre
+# -------------
+
+getcorrect
+# -------------
+# description : Récupère toutes les réponses corrections d'une question
+# -------------
+
+getdescription
+# -------------
+# description : Retourne la description d'un script passé en paramètre
+# -------------
+
+getrandomqtex
+# -------------
+# description : à tester
+# -------------
+
+global.sh
+# -------------
+# description : Variables et fonctions globales
+# -------------
+
+moodle
+# -------------
+# description : Génère un fichier xml de toutes les questions du répertoire
+#               de questions passé en paramètre. Le nom du fichier de sortie est
+#               également passé en paramètre.
+#               Ce script vérifie si le fichier *.tex_ a été modifié et appelle
+#               genxml seulement si c'est le cas.
+# -------------
+
+moodle_all
+# -------------
+# description :  Génère les fichiers xml des questions de qtex et qtex_english
+# -------------
+
+removetex
+# -------------
+# description : Ce script enlève tous les balises LaTex texttt de la chaine
+#               de caractère passée en paramètre.
+# -------------
+
+statTAGS
+# -------------
+# description :  Retourne des statistiques sur les TAGS à partir d'un repertoire
+#                de questions ou un fichier listant des questions passé en
+#                paramètre. Ce script un wrapper pour un script python faisant
+#                les calculs statistiques.
+# -------------
+
+statTAGS.py
+# -------------
+# description : Réalise la statistique des TAGS passé en entrée standard.
+#               Le fichier d'entrée est de la forme :
+#               #TAGS #tag1 #tag2 #tag3
+#               #TAGS #tag1 #tag2
+#               #TAGS #tag1 #tag2 #tag3 #tag4
+# -------------
+
+teXQ
+# -------------
+# description : Génère le fichier le programme latex du corrigé ou de l'énoncé
+#               pour une question donnée passée en paramètre. Le script prend 3
+#               paramètres.
+#               Note ce script fait beaucoup trop de choses !!
+# -------------
+
+tex2html
+# -------------
+# description :  Ce script filtre et transforme une chaine de caractères
+#                comportant des instructions LaTeX vers des balises html
+# -------------
+
+textQ
+# -------------
+# description : Retourne le texte et uniquement le texte d'une question passée
+#               en paramètre.
+# -------------
+
+trans
+# -------------
+# description :  Traduit une question au format tex_ du français vers l'anglais.
+#                La question est passée en paramètre.
+#                Le script utilise l'api de google
+# -------------
+
+trans_all
+# -------------
+# description :  Applique le script bin/trans sur tous les fichiers de qtex
+# -------------
+
+transfTAGS
+# -------------
+# description : Copie les TAGS de la base de données en français et à celle en
+#               en anglais. Ainsi il ne suffit que de maintenir les TAGS des
+#               questions en français.
+# -------------
+
