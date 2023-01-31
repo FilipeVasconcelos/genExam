@@ -1,0 +1,6 @@
+#!/bin/bash
+# -------------
+# description : Ce script enlève tous les balises LaTex \texttt de la chaine 
+#               de caractère passée en paramètre.
+# -------------
+sed 's/\\texttt{//g; s/}//g' $1

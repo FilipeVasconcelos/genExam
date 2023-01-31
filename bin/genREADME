@@ -1,0 +1,16 @@
+#!/bin/bash
+# -------------
+# description : Ce script génère le fichier README à partir des descriptions
+#               de tous les scripts se trouvant dans bin/
+# -------------
+echo "#main script : bin/genExam" > README
+echo                             >> README
+for script in bin/*
+do
+    if [ "${script}" != "bin/genExam" ] && [ ${script} != "bin/description" ] 
+    then
+        echo ${script}               >> README 
+        bin/getdescription ${script} >> README
+        echo                         >> README
+    fi
+done

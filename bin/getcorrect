@@ -1,0 +1,5 @@
+#!/bin/bash
+# -------------
+# description : Récupère toutes les réponses corrections d'une question 
+# -------------
+bin/getA $1 | grep "✓"

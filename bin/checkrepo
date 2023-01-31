@@ -1,0 +1,16 @@
+#!/bin/bash
+for file in ~/enseignement/unix-inge1/genExam/bin/*
+do 
+    bfile=$(basename $file)
+    if [ ! -f bin/${bfile} ] 
+    then
+        echo "${bfile} file not found"
+        cp ${file} bin/
+    else
+        diff -q ${file} bin/${bfile} >> /dev/null
+        if [ $? -eq 1 ]
+        then
+            cp ${file} bin/${bfile}
+        fi
+    fi
+done
