@@ -2,7 +2,7 @@
 # -------------
 # description : Retourne la description d'un script passé en paramètre 
 # -------------
-source bin/global.sh
+source global.sh
 errorArg 1 $# $0 "<script>"
 script=$1
 firstline=$(grep -nE "^# -------------$" $script | cut -c 1 | head -n1)
