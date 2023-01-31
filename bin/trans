@@ -19,7 +19,7 @@ trans(){
 }
 #translate Q
 Q=$(bin/getQ $1 | sed 's/^#Q //')
-echo "#Q " $(trans "$Q")
+echo "#Q" $(trans "$Q")
 bin/getANS $1
 # translate CM
 A=$(bin/getA $1)

@@ -10,7 +10,7 @@ then
     nlfr=$(wc -l ${file} | cut -d " " -f 1 2> /dev/null)
     if [ ${nlfr} -ne 7 ]
     then
-        echo "problème avec le fichier ${file} (ligne de trop)"
+        echo "problème avec le fichier ${file} (nombre de lignes)"
         exit 1
     fi
     exit 0

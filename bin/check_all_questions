@@ -1,10 +1,13 @@
 #!/bin/bash
 # -------------
-# description : 
+# description : vérifie toutes les questions du répertoire passé en paramètre 
 # -------------
-rep=$1
-for file in $rep/*.tex_
+source bin/global.sh
+errorArg 1 $# $0 "<qtex/>"
+qtex=$1
+for file in ${qtex}/*.tex_
 do
     bin/check_question ${file}
 done
-echo "banque de questions dans ${rep} OK (nombre de lignes)"
+[ $? -eq 0 ] &&  echo "banque de questions dans ${qtex} semble OK"
+exit 0

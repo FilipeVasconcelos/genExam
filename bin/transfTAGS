@@ -4,6 +4,9 @@
 #               en anglais. Ainsi il ne suffit que de maintenir les TAGS des
 #               questions en français.
 # -------------
+bin/check_all_questions qtex
+bin/check_english
+[ $? -ne 0 ] && echo "problème avec la banque de questions" && exit 1 
 for file in qtex/*.tex_
 do
     bfile=$(basename ${file})
@@ -13,3 +16,4 @@ do
     cp tmp qtex_english/${fileEN}
 done
 rm tmp
+exit 0

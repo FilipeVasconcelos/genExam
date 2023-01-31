@@ -1,4 +1,8 @@
 #!/bin/bash
+# -------------
+# description : Affiche le nombre de questions dans le repertoire passé en 
+#               paramètre
+# -------------
 source bin/global.sh
 errorArg 1 $# $0 "<rep_qtex>"
 rep=$1

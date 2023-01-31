@@ -71,9 +71,9 @@ usage()
     echo -e "-o/--order  [file]   : fichier donnant l'ordre des questions (default random)"
     echo -e "-q/--qtex   [rep]    : répertoire des questions à utliser (default qtex ou qtex_english)"
     echo -e "-e/--examen [examen] : nom de l'examen (default = Examen final)"
-    echo -e "-m/--module [module] : module de l'examen (default = None)"
-    echo -e "-p/--promo  [promo]  : promotion (default = None )"
-    echo -e "-a/--annee  [annee]  : année scolaire (default = None)"
+    echo -e "-m/--module [module] : module de l'examen (default = UNIX)"
+    echo -e "-p/--promo  [promo]  : promotion (default = INGE1)"
+    echo -e "-a/--annee  [annee]  : année scolaire (default = 2022-2023)"
     echo -e "-d/--date   [date]   : date de l'examen (default = None)"
 }
 clean_build()
@@ -139,10 +139,10 @@ fi
 # option parser 
 # valeurs par défaut
 nbQ=  # nombre de questions à générer
-module=""
-promo=""
-dateEx=""
-annee=""
+module="UNIX"
+promo="INGE1"
+dateEx="XX janvier 202X"
+annee="2022-2023"
 english= # version en anglais   non : vide oui : _en
 while [ $# -gt 0 ]
 do
@@ -182,15 +182,12 @@ do
     esac
     shift
 done
-echo "fin de lecture des options"
-[ -z ${module} ] && echo "Donner un nom de module (option --module) exemple : --module UNIX" && exit 1
-[ -z ${promo} ] && echo "Donner un nom de promotion (option --promo) exemple : --promo INGE1" && exit 1
-[ -z ${dateEx} ] && echo "Donner une date d'examen (option --date) exemple : --date \"5 janvier 2023\"" && exit 1
-[ -z ${annee} ] && echo "Donner une année académique (option --annee) exemple : --annee 2022-2023" && exit 1
-if [ -z "${english}" ]
+echo ${examen}
+if [ -z "${english}" ] && [ -z "${examen}" ]
 then
     examen="Examen final"
-else
+elif [ -z "${examen}" ]
+then
     examen="Final Exam"
 fi
 # banque de questions anglais ou français ?

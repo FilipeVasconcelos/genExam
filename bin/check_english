@@ -17,3 +17,4 @@ do
     fi
 done
 echo "banque de questions OK (english version)"
+exit 0

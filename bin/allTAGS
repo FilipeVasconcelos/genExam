@@ -23,6 +23,5 @@ else
         ntag=$(($(echo "$(bin/getTAGS ${file})" | wc -w) -1 ))
         [ ${ntag} -eq 0 ] && echo -e ${RED}"no tag" ${file} ${NC} 
         [ ${ntag} -eq 1 ] && echo -e ${RED}"only one tag" ${file} ${NC} 
-
     done
 fi
