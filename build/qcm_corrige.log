@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.4.2)  22 DEC 2022 17:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.4.2)  31 JAN 2023 10:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -996,97 +996,99 @@ Overfull \hbox (6.79999pt too wide) in paragraph at lines 68--71
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-19.
+17.
 
 (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Underfull \hbox (badness 10000) in paragraph at lines 119--119
- [][] \T1/lmr/bx/n/10.95 3.  \T1/lmr/m/n/10.95 Ex-tract the TAGS line from
+Underfull \hbox (badness 10000) in paragraph at lines 117--117
+ [][] \T1/lmr/bx/n/10.95 2.  \T1/lmr/m/n/10.95 Ex-trait la ligne des TAGS
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--119
- \T1/lmr/m/n/10.95 a ques-tion pas-sed as a pa-ra-me-ter
+Underfull \hbox (badness 10000) in paragraph at lines 117--117
+ \T1/lmr/m/n/10.95 d'une ques-tion pas-sée en pa-ra-mètre
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--119
- [][] \T1/lmr/bx/n/10.95 4.  \T1/lmr/m/n/10.95 Mixes the pro-po-si-tions of a
+Underfull \hbox (badness 10000) in paragraph at lines 117--117
+ [][] \T1/lmr/bx/n/10.95 4.  \T1/lmr/m/n/10.95 Gé-nère un do-cu-ment pdf d'exa-
+
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--119
- \T1/lmr/m/n/10.95 ques-tion pas-sed as a pa-ra-me-ter
+Underfull \hbox (badness 10000) in paragraph at lines 117--117
+ \T1/lmr/m/n/10.95 men à par-tir d'une banque de ques-tions
  []
 
 
-Overfull \hbox (17.00114pt too wide) in paragraph at lines 81--125
+Overfull \hbox (17.0171pt too wide) in paragraph at lines 79--123
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 81--125
+Underfull \hbox (badness 10000) in paragraph at lines 79--123
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 81--125
+Underfull \hbox (badness 10000) in paragraph at lines 79--123
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 165--165
- [][] \T1/lmr/bx/n/10.95 3.  \T1/lmr/m/n/10.95 Ex-tract the TAGS line from
+Underfull \hbox (badness 10000) in paragraph at lines 163--163
+ [][] \T1/lmr/bx/n/10.95 2.  \T1/lmr/m/n/10.95 Ex-trait la ligne des TAGS
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 165--165
- \T1/lmr/m/n/10.95 a ques-tion pas-sed as a pa-ra-me-ter
+Underfull \hbox (badness 10000) in paragraph at lines 163--163
+ \T1/lmr/m/n/10.95 d'une ques-tion pas-sée en pa-ra-mètre
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 165--165
- [][] \T1/lmr/bx/n/10.95 4.  \T1/lmr/m/n/10.95 Mixes the pro-po-si-tions of a
+Underfull \hbox (badness 10000) in paragraph at lines 163--163
+ [][] \T1/lmr/bx/n/10.95 4.  \T1/lmr/m/n/10.95 Gé-nère un do-cu-ment pdf d'exa-
+
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 165--165
- \T1/lmr/m/n/10.95 ques-tion pas-sed as a pa-ra-me-ter
+Underfull \hbox (badness 10000) in paragraph at lines 163--163
+ \T1/lmr/m/n/10.95 men à par-tir d'une banque de ques-tions
  []
 
 
 AED: lastpage setting LastPage
 
-Overfull \hbox (17.00114pt too wide) in paragraph at lines 127--168
+Overfull \hbox (17.0171pt too wide) in paragraph at lines 125--166
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 127--168
+Underfull \hbox (badness 10000) in paragraph at lines 125--166
 
  []
 
 [3
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 168.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 168.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 166.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 166.
  (/home/filipe/dev/genExam/build/qcm_corrige.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 168.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 168.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 166.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 166.
 Package rerunfilecheck Info: File `qcm_corrige.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 168.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 166.
  ) 
 Here is how much of TeX's memory you used:
  21981 strings out of 483081
  392275 string characters out of 5963442
- 660492 words of memory out of 5000000
+ 660496 words of memory out of 5000000
  36509 multiletter control sequences out of 15000+600000
  579751 words of font info for 64 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
@@ -1098,8 +1100,8 @@ ic/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/t
 exmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lm
 ri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on /home/filipe/dev/genExam/build/qcm_corrige.pdf (3 pages, 1886
-01 bytes).
+Output written on /home/filipe/dev/genExam/build/qcm_corrige.pdf (3 pages, 1866
+80 bytes).
 PDF statistics:
  66 PDF objects out of 1000 (max. 8388607)
  51 compressed objects within 1 object stream
