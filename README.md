@@ -6,7 +6,7 @@ Le fonctionnement globale est décrit par le diagramme suivant :
 ``` 
        .tex_ => .tex => .pdf
 ```
-Un ensemble de questions dans un format spécifique `tex_` sont filtrés pour
+Un ensemble de questions dans un format spécifique `tex_` est filtré pour
 produire un fichier `tex` de questions individuelles à partir d'un template afin 
 d'enrichir un fichier `tex` global. Ce dernier est finalement compilé pour obtenir 
 le fichier `pdf` final.
@@ -128,10 +128,10 @@ D. \texttt{cp} 4. Copy files and directories
 #TAGS #commandesDeBase #ls #cat #rm #cp #cours01
 ```
 
-## Transformer une question tex_ au format moodle
+## Transformer une question tex_ au format xml (moodle)
 
 Il est possible de transformer les questions de la banque de questions du format
-`.tex_` au format xml celui-ci pouvant être importé sur la platerforme Moodle.
+`.tex_` au format `xml` celui-ci pouvant être importé sur la platerforme Moodle.
 
 ### Exemple d'appel des scripts genxml ou script moodle
 
@@ -141,10 +141,29 @@ au format `tex_` passé en paramètre
 $ bin/genxml qtex/genExam_A.tex_
 ```
 
-Pour produire un fichier xml complet `banque_question.xml` avec toutes les 
+Pour produire un fichier `xml` complet `banque_question.xml` avec toutes les 
 questions d'un repertoire `qtex/`, vous pouvez utiliser la commande suivante :
 ```
 $ bin/moodle qtex banque_question.xml
+```
+
+## Transformer une question tex_ au format csv (wooclap)
+
+Il est possible de transformer les questions de la banque de questions du format
+`.tex_` au format `csv` celui-ci pouvant être importé sur la platerforme Wooclap.
+
+### Exemple d'appel des scripts genicsv ou script wooclap
+
+L'appel suivant produit un fichier `csv/genExam_A.csv` à partir d'une question
+au format `tex_` passé en paramètre
+```
+$ bin/gencsv qtex/genExam_A.tex_
+```
+
+Pour produire un fichier `csv` complet `banque_question.csv` avec toutes les 
+questions d'un repertoire `qtex/`, vous pouvez utiliser la commande suivante :
+```
+$ bin/wooclap qtex banque_question.csv
 ```
 
 # Credits
