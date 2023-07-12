@@ -41,8 +41,8 @@ if __name__=="__main__":
         if m1 and m2 : 
             M1.append(m1)
             M2.append(m2)
-            maxm1=max(maxm1,(len(m1.group(0).split(" ",1)[1])+8)*1.51323)
-            maxm2=max(maxm2,(len(m2.group(0).split(" ",1)[1])+8)*1.51323)
+            maxm1=max(maxm1,(len(m1.group(0).split(" ",1)[1])+12)*1.51323)
+            maxm2=max(maxm2,(len(m2.group(0).split(" ",1)[1])+12)*1.51323)
     k = 0
     for m1,m2 in zip(M1,M2):
         if k==0 : template_1(m1,m2,str(maxm1)+'mm',str(maxm2)+'mm')
