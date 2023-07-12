@@ -1,73 +1,34 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[11pt,a4paper,twoside]{article} %twocolumn
+\usepackage[francais]{babel}
+\usepackage[babel=true,kerning=true]{microtype}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[frenchb]{babel}
-\usepackage[top=2cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
-\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
-\usepackage{lastpage}
-\usepackage{enumerate}
+\usepackage{lmodern}
+\usepackage{geometry}
+\geometry{hmargin=2.5cm,vmargin=2.5cm}
+\usepackage{graphicx}
 \usepackage[dvipsnames]{xcolor}
-\usepackage{fancyhdr}
-\usepackage{mathrsfs}
-\usepackage{xcolor}
 \usepackage{pifont}% http://ctan.org/pkg/pifont
 \newcommand{\cmark}{\ding{51}}%
 \newcommand{\xmark}{\ding{55}}%
-\usepackage{lmodern}
-\usepackage{graphicx}
-\usepackage{listings}
-\usepackage{hyperref}
-\usepackage{enumitem}
-\usepackage{float}
-\usepackage{fancyvrb}
-\usepackage{qcmexoq}
-\usepackage{tikz,pgf}
-\usepackage{environ}
-\usetikzlibrary{calc}
-\usetikzlibrary{positioning}
-\pagestyle{fancyplain}
-\headheight 35pt
-\lhead{\userID}
-\chead{\textbf{\Large __EXAMEN__}}
-\rhead{\course \\ __DATE__}
-\lfoot{}
-\cfoot{}
-\rfoot{\small\thepage}
-\headsep 1.5em
-\usepackage{textcomp}
-%\newcommand\course{ESME __SITE__ -- UNIX}
-\newcommand\course{__MODULE__}
-\newcommand\hwnumber{1}
-\newcommand\userID{ESME}
-\newcommand\tr{\textquotesingle}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\title{\textsc{__PROMO__ -- __MODULE__}\\
-    \emph{__EXAMEN__} \\
-    Durée : 2h
-}
-\date{__DATE__}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\graphicspath{{./img/}}
+\usepackage{examen}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Modifier les variables suivantes 
+\newcommand\promo{__PROMO__}                              %ex. IngéSUP, IngéSPE, Ingé1
+\newcommand\module{__MODULE__}                   %ex. Systèmes Techniques, Mathématiques Fondamentales
+\newcommand\annee{__DATE__}                   %ex. 2022-2023
+\newcommand\epreuve{__EXAMEN__}                 %ex. MidTerm, FinalExam, Rattrapage
+\newcommand\titreEval{__TITRE__} %ex. Dynamique et Déformation
+\newcommand\dureeEval{__DUREE__}                     %en nombre d'heures
+\reponse{true}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \maketitle
-
-\thispagestyle{empty}
-\begin{figure}[!h]
-    \centering
-%    \includegraphics[width=0.7\textwidth]{fig/ESME_LOGO_VILLES_QUADRI_2021.jpg}
-\end{figure}
-
-\vfill
-{\noindent\Large \textbf{\textsc{Nom Prénom}}}\\[1cm]
-\rule{0.8\textwidth}{1pt}
-
-\vfill
-\noindent\fbox{\parbox{\linewidth\fboxrule\fboxsep}{\textbf{Documents non autorisés.}
-        \textbf{Moyens de calculs non autorisés.}
-}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\thispagestyle{fancy}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
 \section*{Consignes}

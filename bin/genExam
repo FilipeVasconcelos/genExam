@@ -75,6 +75,8 @@ usage()
     echo -e "-p/--promo  [promo]  : promotion (default = INGE1)"
     echo -e "-a/--annee  [annee]  : année scolaire (default = 2022-2023)"
     echo -e "-d/--date   [date]   : date de l'examen (default = None)"
+    echo -e "-t/--titre  [title]  : titre de l'examen (default = None)"
+    echo -e "-du/--duree [duree]   : date de l'examen (default = 2)"
 }
 clean_build()
 {
@@ -144,6 +146,8 @@ promo="INGE1"
 dateEx="XX janvier 202X"
 annee="2022-2023"
 english= # version en anglais   non : vide oui : _en
+titre=
+duree=2
 while [ $# -gt 0 ]
 do
     opt=$1
@@ -179,6 +183,12 @@ do
         -a|--annee) 
             annee=$2
             shift;;
+        -t|--titre) 
+            titre=$2
+            shift;;
+        -du|--duree) 
+            duree=$2
+            shift;;
     esac
     shift
 done
@@ -210,8 +220,11 @@ fi
 sed -e "s/__MODULE__/${module}/" \
     -e "s/__DATE__/${dateEx}/" \
     -e "s/__PROMO__/${promo}/" \
+    -e "s/__DUREE__/${duree}/" \
+    -e "s/__TITRE__/${titre}/" \
     -e "s/__EXAMEN__/${examen}/" \
     -e "s/__ANNEE__/${annee}/" ${templates}/template_qcm${english}.tex > ${build}/template.tex
+cp template/examen.sty ${build}/
 # ------------------------------------------------------------------------------
 examenOut="${examen,,}"
 examenOut="${examenOut// /_}" 
