@@ -38,16 +38,11 @@
     \item Dans le cas des questions d'appariement : tracez un trait entre les énoncés et leurs réponses.
 \end{itemize}
 \section*{Questions}
-\question{Quel est le but du script \texttt{genExam} ?}\\[0.0cm]
-\indent\textbf{A.}  Générer un document pdf d'examen à partir d'une banque de questions \newline\hfill
-\indent\textbf{B.}  Permet de ne pas aller en cours et de lancer un script le jour de l'examen \newline\hfill
-\indent\textbf{C.}  Faire le café \newline\hfill
-\indent\textbf{D.}  Un prétexte pour faire du bash \newline\hfill
 \question{Associer chaque script à une tâche }\\[0.0cm]
 \indent\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}
 
-    \node[text width=45.3969mm,align=left] (a1) at (0,0) {\textbf{ A. } \texttt{aleaQ}     };
+    \node[text width=45.3969mm,align=left] (a1) at (0,0) {\textbf{ A. } \texttt{getQ}      };
     \node (b1) at ($(a1.east)+(1,0)$) {};
     \node (c1) at ($(b1.east)+(2,0)$) {};
     \draw[thick,outer sep=8mm] (b1) circle(0.5ex);
@@ -59,22 +54,27 @@
     \node[below=0.75cm of c1.center,anchor=center] (c2) {};
     \draw[thick,outer sep=8mm] (b2) circle(0.5ex);
     \draw[thick,outer sep=8mm] (c2) circle(0.5ex);
-    \node[below=0.75cm of d1.center,anchor=center,text width=118.03194mm,align = right] (d2) {\textbf{ 2. } Génère un document pdf d'examen à partir d'une banque de questions };
+    \node[below=0.75cm of d1.center,anchor=center,text width=118.03194mm,align = right] (d2) {\textbf{ 2. } Renvoie la chaine de la question passée en paramètre };
 
     \node[text width=45.3969mm,below=0.75cm of a2.center,anchor=center,align=left] (a3) {\textbf{ C. } \texttt{genExam}   };
     \node[below=0.75cm of b2.center,anchor=center] (b3) {};
     \node[below=0.75cm of c2.center,anchor=center] (c3) {};
     \draw[thick,outer sep=8mm] (b3) circle(0.5ex);
     \draw[thick,outer sep=8mm] (c3) circle(0.5ex);
-    \node[below=0.75cm of d2.center,anchor=center,text width=118.03194mm,align = right] (d3) {\textbf{ 3. } Renvoie la chaine de la question passée en paramètre };
+    \node[below=0.75cm of d2.center,anchor=center,text width=118.03194mm,align = right] (d3) {\textbf{ 3. } Extrait la ligne des TAGS d'une question passée en paramètre };
 
-    \node[text width=45.3969mm,below=0.75cm of a3.center,anchor=center,align=left] (a4) {\textbf{ D. } \texttt{getQ}      };
+    \node[text width=45.3969mm,below=0.75cm of a3.center,anchor=center,align=left] (a4) {\textbf{ D. } \texttt{aleaQ}     };
     \node[below=0.75cm of b3.center,anchor=center] (b4) {};
     \node[below=0.75cm of c3.center,anchor=center] (c4) {};
     \draw[thick,outer sep=8mm] (b4) circle(0.5ex);
     \draw[thick,outer sep=8mm] (c4) circle(0.5ex);
-    \node[below=0.75cm of d3.center,anchor=center,text width=118.03194mm,align = right] (d4) {\textbf{ 4. } Extrait la ligne des TAGS d'une question passée en paramètre };
+    \node[below=0.75cm of d3.center,anchor=center,text width=118.03194mm,align = right] (d4) {\textbf{ 4. } Génère un document pdf d'examen à partir d'une banque de questions };
 
 \end{tikzpicture}
 }%
+\question{Quel est le but du script \texttt{genExam} ?}\\[0.0cm]
+\indent\textbf{A.}  Faire le café \newline\hfill
+\indent\textbf{B.}  Un prétexte pour faire du bash \newline\hfill
+\indent\textbf{C.}  Permet de ne pas aller en cours et de lancer un script le jour de l'examen \newline\hfill
+\indent\textbf{D.}  Générer un document pdf d'examen à partir d'une banque de questions \newline\hfill
 \end{document}

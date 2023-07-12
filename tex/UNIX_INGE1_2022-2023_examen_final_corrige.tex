@@ -38,16 +38,11 @@
     \item Dans le cas des questions d'appariement : tracez un trait entre les énoncés et leurs réponses.
 \end{itemize}
 \section*{Questions}
-\question{Quel est le but du script \texttt{genExam} ?}\\[0.0cm]
-\indent\textbf{A.} {\color{OliveGreen}  Générer un document pdf d'examen à partir d'une banque de questions {\large\cmark} }\newline
-\indent\textbf{B.} {\color{BrickRed}    Permet de ne pas aller en cours et de lancer un script le jour de l'examen {\large\xmark} }\newline
-\indent\textbf{C.} {\color{BrickRed}    Faire le café {\large\xmark} }\newline
-\indent\textbf{D.} {\color{OliveGreen}  Un prétexte pour faire du bash {\large\cmark} }\newline
 \question{Associer chaque script à une tâche }\\[0.0cm]
 \indent\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}
 
-    \node[text width=45.3969mm,align=left] (a1) at (0,0) {\textbf{ A. } \texttt{aleaQ}     };
+    \node[text width=45.3969mm,align=left] (a1) at (0,0) {\textbf{ A. } \texttt{getQ}      };
     \node (b1) at ($(a1.east)+(1,0)$) {};
     \node (c1) at ($(b1.east)+(2,0)$) {};
     \draw[thick,outer sep=8mm] (b1) circle(0.5ex);
@@ -59,37 +54,41 @@
     \node[below=0.75cm of c1.center,anchor=center] (c2) {};
     \draw[thick,outer sep=8mm] (b2) circle(0.5ex);
     \draw[thick,outer sep=8mm] (c2) circle(0.5ex);
-    \node[below=0.75cm of d1.center,anchor=center,text width=118.03194mm,align = right] (d2) {\textbf{ 2. } Génère un document pdf d'examen à partir d'une banque de questions };
+    \node[below=0.75cm of d1.center,anchor=center,text width=118.03194mm,align = right] (d2) {\textbf{ 2. } Renvoie la chaine de la question passée en paramètre };
 
     \node[text width=45.3969mm,below=0.75cm of a2.center,anchor=center,align=left] (a3) {\textbf{ C. } \texttt{genExam}   };
     \node[below=0.75cm of b2.center,anchor=center] (b3) {};
     \node[below=0.75cm of c2.center,anchor=center] (c3) {};
     \draw[thick,outer sep=8mm] (b3) circle(0.5ex);
     \draw[thick,outer sep=8mm] (c3) circle(0.5ex);
-    \node[below=0.75cm of d2.center,anchor=center,text width=118.03194mm,align = right] (d3) {\textbf{ 3. } Renvoie la chaine de la question passée en paramètre };
+    \node[below=0.75cm of d2.center,anchor=center,text width=118.03194mm,align = right] (d3) {\textbf{ 3. } Extrait la ligne des TAGS d'une question passée en paramètre };
 
-    \node[text width=45.3969mm,below=0.75cm of a3.center,anchor=center,align=left] (a4) {\textbf{ D. } \texttt{getQ}      };
+    \node[text width=45.3969mm,below=0.75cm of a3.center,anchor=center,align=left] (a4) {\textbf{ D. } \texttt{aleaQ}     };
     \node[below=0.75cm of b3.center,anchor=center] (b4) {};
     \node[below=0.75cm of c3.center,anchor=center] (c4) {};
     \draw[thick,outer sep=8mm] (b4) circle(0.5ex);
     \draw[thick,outer sep=8mm] (c4) circle(0.5ex);
-    \node[below=0.75cm of d3.center,anchor=center,text width=118.03194mm,align = right] (d4) {\textbf{ 4. } Extrait la ligne des TAGS d'une question passée en paramètre };
+    \node[below=0.75cm of d3.center,anchor=center,text width=118.03194mm,align = right] (d4) {\textbf{ 4. } Génère un document pdf d'examen à partir d'une banque de questions };
 
-\draw[very thick] (b3) -- (c2);
-\draw[very thick] (b2) -- (c4);
-\draw[very thick] (b1) -- (c1);
-\draw[very thick] (b4) -- (c3);
+\draw[very thick] (b3) -- (c4);
+\draw[very thick] (b2) -- (c3);
+\draw[very thick] (b4) -- (c1);
+\draw[very thick] (b1) -- (c2);
 
 \end{tikzpicture}
 }%
+\question{Quel est le but du script \texttt{genExam} ?}\\[0.0cm]
+\indent\textbf{A.} {\color{BrickRed}    Faire le café {\large\xmark} }\newline
+\indent\textbf{B.} {\color{OliveGreen}  Un prétexte pour faire du bash {\large\cmark} }\newline
+\indent\textbf{C.} {\color{BrickRed}    Permet de ne pas aller en cours et de lancer un script le jour de l'examen {\large\xmark} }\newline
+\indent\textbf{D.} {\color{OliveGreen}  Générer un document pdf d'examen à partir d'une banque de questions {\large\cmark} }\newline
 \,\clearpage
 \section*{Corrigé (Résumé)}
-\noindent\textbf{Q.1} A. D. \newline
-\textbf{Q.2} \newline
+\noindent\textbf{Q.1} \newline
 \indent\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}
 
-    \node[text width=45.3969mm,align=left] (a1) at (0,0) {\textbf{ A. } \texttt{aleaQ}     };
+    \node[text width=45.3969mm,align=left] (a1) at (0,0) {\textbf{ A. } \texttt{getQ}      };
     \node (b1) at ($(a1.east)+(1,0)$) {};
     \node (c1) at ($(b1.east)+(2,0)$) {};
     \draw[thick,outer sep=8mm] (b1) circle(0.5ex);
@@ -101,28 +100,29 @@
     \node[below=0.75cm of c1.center,anchor=center] (c2) {};
     \draw[thick,outer sep=8mm] (b2) circle(0.5ex);
     \draw[thick,outer sep=8mm] (c2) circle(0.5ex);
-    \node[below=0.75cm of d1.center,anchor=center,text width=118.03194mm,align = right] (d2) {\textbf{ 2. } Génère un document pdf d'examen à partir d'une banque de questions };
+    \node[below=0.75cm of d1.center,anchor=center,text width=118.03194mm,align = right] (d2) {\textbf{ 2. } Renvoie la chaine de la question passée en paramètre };
 
     \node[text width=45.3969mm,below=0.75cm of a2.center,anchor=center,align=left] (a3) {\textbf{ C. } \texttt{genExam}   };
     \node[below=0.75cm of b2.center,anchor=center] (b3) {};
     \node[below=0.75cm of c2.center,anchor=center] (c3) {};
     \draw[thick,outer sep=8mm] (b3) circle(0.5ex);
     \draw[thick,outer sep=8mm] (c3) circle(0.5ex);
-    \node[below=0.75cm of d2.center,anchor=center,text width=118.03194mm,align = right] (d3) {\textbf{ 3. } Renvoie la chaine de la question passée en paramètre };
+    \node[below=0.75cm of d2.center,anchor=center,text width=118.03194mm,align = right] (d3) {\textbf{ 3. } Extrait la ligne des TAGS d'une question passée en paramètre };
 
-    \node[text width=45.3969mm,below=0.75cm of a3.center,anchor=center,align=left] (a4) {\textbf{ D. } \texttt{getQ}      };
+    \node[text width=45.3969mm,below=0.75cm of a3.center,anchor=center,align=left] (a4) {\textbf{ D. } \texttt{aleaQ}     };
     \node[below=0.75cm of b3.center,anchor=center] (b4) {};
     \node[below=0.75cm of c3.center,anchor=center] (c4) {};
     \draw[thick,outer sep=8mm] (b4) circle(0.5ex);
     \draw[thick,outer sep=8mm] (c4) circle(0.5ex);
-    \node[below=0.75cm of d3.center,anchor=center,text width=118.03194mm,align = right] (d4) {\textbf{ 4. } Extrait la ligne des TAGS d'une question passée en paramètre };
+    \node[below=0.75cm of d3.center,anchor=center,text width=118.03194mm,align = right] (d4) {\textbf{ 4. } Génère un document pdf d'examen à partir d'une banque de questions };
 
-\draw[very thick] (b3) -- (c2);
-\draw[very thick] (b2) -- (c4);
-\draw[very thick] (b1) -- (c1);
-\draw[very thick] (b4) -- (c3);
+\draw[very thick] (b3) -- (c4);
+\draw[very thick] (b2) -- (c3);
+\draw[very thick] (b4) -- (c1);
+\draw[very thick] (b1) -- (c2);
 
 \end{tikzpicture}
 }%
 \newline
+\textbf{Q.2} B. D. \newline
 \end{document}
