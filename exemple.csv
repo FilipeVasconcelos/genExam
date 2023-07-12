@@ -1,0 +1,3 @@
+Type,Title,Correct,Choice,Choice,Choice,Choice
+Matching,"Associer chaque script à une tâche",,"$\texttt{genExam}$ --- Génère un document pdf d'examen à partir d'une banque de questions","$\texttt{getTAGS}$ --- Extrait la ligne des TAGS d'une question passée en paramètre","$\texttt{aleaQ}$ --- Mélange les propositions d'une question passée en paramètre ","$\texttt{getQ}$ --- Renvoie la chaine de la question passée en paramètre"
+MCQ,"Quel est le but du script $\texttt{genExam}$ ?", 2 4,"Permet de ne pas aller en cours et de lancer un script le jour de l'examen","Un prétexte pour faire du bash","Faire le café","Générer un document pdf d'examen à partir d'une banque de questions"

@@ -1,7 +1,7 @@
 #Q Associer chaque script à une tâche 
-#ANS A 
+#ANS A
 A. \texttt{genExam} 1. Génère un document pdf d'examen à partir d'une banque de questions
-B. \texttt{getTAGS}   2. Extrait la ligne des TAGS d'une question passée en paramètre
+B. \texttt{getTAGS} 2. Extrait la ligne des TAGS d'une question passée en paramètre
 C. \texttt{aleaQ}   3. Mélange les propositions d'une question passée en paramètre 
 D. \texttt{getQ}    4. Renvoie la chaine de la question passée en paramètre
 #TAGS #tag1 #tag2
