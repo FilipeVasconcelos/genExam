@@ -11,7 +11,7 @@ build=${PWD}/build
 quest=$1
 texam=$2
 numQ=$3
-echo "\question{$(bin/getQ ${quest} | grep -oP "(?<=#Q )(.*)")}\\\\[0.2cm]"
+echo "\question{$(bin/getQ ${quest} | grep -oP "(?<=#Q )(.*)")}\\\\[0.0cm]"
 bin/getA ${quest} > tmp 
 ECgetA=$? 
 # -----------------------------------------------------------------------------
