@@ -5,12 +5,12 @@
 # -------------
 echo "#main script : bin/genExam" > README
 echo                             >> README
-for script in *
+for script in bin/*
 do
-    if [ "${script}" != "genExam" ] && [ ${script} != "description" ] 
+    if [ "${script}" != "bin/genExam" ] && [ ${script} != "bin/description" ] 
     then
         echo ${script}               >> README 
-        ./getdescription ${script} >> README
+        bin/getdescription ${script} >> README
         echo                         >> README
     fi
 done
