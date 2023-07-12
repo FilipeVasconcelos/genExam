@@ -1,0 +1,60 @@
+#!/bin/bash
+# -------------
+# description : Ce script retourne une question au format xml à partir
+#               d'une question au format tex_
+# -------------
+clean_build()
+{
+    rm ${build}/* 2> /dev/null
+}
+# -------------------------------------------------------------------
+#  working directories
+# -------------------------------------------------------------------
+bin=${PWD}/bin
+build=${PWD}/build
+clean_build
+
+ques=$1
+textQTEX=$(bin/textQ $ques)
+textQHTML=$(echo ${textQTEX} | bin/tex2woo)
+typeCM=false
+typeA=false
+[ "$(bin/getANS ${ques})" == "#ANS CM" ] && typeCM=true
+[ "$(bin/getANS ${ques})" == "#ANS A" ] && typeA=true
+bse=$(basename -s .tex_ ${ques})
+name=$(echo ${bse} | tr _ " " | sed -e 's/\(.*\) \([[:digit:]]\)/\1 (\2)/g')
+csv=csv/${bse}.csv
+
+bin/aleaQ ${ques} > ${build}/tmp 
+if [ "${typeCM}" == "true" ]
+then
+    echo "typeQ    : CM"
+    corrects=
+    count=1
+    for lett in A. B. C. D.
+    do
+        if [ ! -z "$(bin/getcorrect ${build}/tmp | grep ${lett})" ]
+        then
+            corrects=${corrects}" "${count}
+        fi
+        count=$((count+1))
+    done
+    csvline="MCQ,\"${textQHTML}\",${corrects}"
+    for ans in $(seq 4)
+    do
+        ATEX=$(bin/getA ${build}/tmp | head -n ${ans} | tail -n1 | sed -e "s/[A-D]\. \(.*\) \\\newline *✓*/\1/g") 
+        AHTML=$(echo ${ATEX} | bin/tex2woo)
+        csvline=${csvline},\"${AHTML}\"
+    done
+elif [ "${typeA}" == "true" ]
+then
+    echo "typeQ    : A"
+    csvline="Matching,\"${textQHTML}\"",
+    for ans in $(seq 4)
+    do
+        text=$(bin/getA ${ques} | head -n ${ans} | tail -n1 | sed -e 's/[A-Z]\. \(.*\) [1-9]\..*/\1/g' | bin/tex2woo)
+        answer=$(bin/getA ${ques} | head -n ${ans} | tail -n1 | sed -e 's/[A-Z]\..*[1-9]\. \(.*\)/\1/g' | bin/tex2woo)
+        csvline=${csvline},\"$text" --- "$answer\"
+    done
+fi
+echo $csvline > ${csv}

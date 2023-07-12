@@ -1,0 +1,23 @@
+#!/bin/bash
+# -------------
+# description :  Ce script filtre et transforme une chaine de caractères 
+#                comportant des instructions LaTeX vers des balises html
+# -------------
+sed -E 's/\\\,//g' $1 |                                 # \, -> enlever les espaces
+sed -E 's/\{\}//g' |                                    # {} -> enlever
+sed -E 's/\"/\x27/g' |                                    # {} -> enlever
+perl -0777 -pe 's/((?:[^\$]+)+)\\\$/\1}\\\$\\texttt{/g' |
+sed -E 's/\\texttt\{\\\$\\#\}/$#/g' |  #exception 1 wooclap
+sed -E 's/\\texttt\{\\\$@}/$@/g' |  #exception 2 wooclap
+sed -E 's/\\texttt\{\\\$\?\}/$?/g' |  #exception 3 wooclap
+sed -E 's/\\texttt\{\\\$\*\}/$*/g' |  #exception 4 wooclap
+sed -E 's/\\texttt\{\\\&\}/\&/g' |  #exception 5 wooclap
+sed -E 's/\\texttt\{echo \\\$\\\{array\[\@\]\\\} \}/\\texttt{echo} \\$\\texttt{array\[@\]\}/g' | #exception 6 wooclap
+sed -E 's/\\texttt\{echo \\\$\\\{array\\\} \}/\\texttt{echo} \\$\\texttt{AABBCCarrayCCBBAA\}/g' | #exception 7
+sed -E 's/\\texttt\{echo \\\$\\\{array\[\*\]\\\} \}/\\texttt{echo} \\$\\texttt{array\[*\]\}/g' | #exception 8
+sed -E 's/\\\{/AABBCC/g' | sed -E 's/\\\}/CCBBAA/g' |   # transformer \} -> AABBCC  \} -> CCBBAA
+sed -E 's/\\textbf\{([^}]*)\}/\1/g' | # \textbf{group} -> <strong>groupe</strong>
+sed -E 's/\\verb\?([^\?]*)\?/$\\texttt\{\1\}$/g' |          # \verb?group? -> <tt>group</tt>
+sed -E 's/\\texttt\{([^}]*)\}/$\\texttt\{\1\}$/g' |         # \texttt{group} -> <tt>group</tt>
+sed -E 's/AABBCC/\\\{/g' |                                 # {} -> enlever
+sed -E 's/CCBBAA/\\\}/g'                                   # {} -> enlever

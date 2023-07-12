@@ -1,0 +1,6 @@
+#!/bin/bash
+# -------------
+# description :  Génère les fichiers csv (wooclap) des questions de qtex et qtex_english 
+# -------------
+bin/wooclap qtex qtex_wooclap.csv
+bin/wooclap qtex_english qtex_english_wooclap.csv
