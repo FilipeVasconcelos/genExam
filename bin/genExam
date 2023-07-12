@@ -75,7 +75,7 @@ usage()
     echo -e "-p/--promo  [promo]  : promotion (default = INGE1)"
     echo -e "-a/--annee  [annee]  : année scolaire (default = 2022-2023)"
     echo -e "-d/--date   [date]   : date de l'examen (default = None)"
-    echo -e "-t/--titre  [title]  : titre de l'examen (default = None)"
+    echo -e "-t/--titre  [titre]  : titre de l'examen (default = None)"
     echo -e "-du/--duree [duree]   : date de l'examen (default = 2)"
 }
 clean_build()
@@ -102,6 +102,8 @@ parameters()
     echo "promo               : ${promo}"
     echo "année               : ${annee}"
     echo "date de l'examen    : ${dateEx}"
+    echo "titre de l'examen   : ${titre}"
+    echo "durée de l'examen   : ${duree}"
     echo "fichier en sortie   : ${output}"
     echo
     echo "------------------------------------------------------------------------------"
@@ -146,7 +148,7 @@ promo="INGE1"
 dateEx="XX janvier 202X"
 annee="2022-2023"
 english= # version en anglais   non : vide oui : _en
-titre=
+titre=None
 duree=2
 while [ $# -gt 0 ]
 do
